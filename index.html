@@ -852,14 +852,14 @@ footer{padding-block:48px}
 .theme-tg{position:relative;flex:none;width:52px;height:28px;margin-left:8px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:inherit;cursor:pointer;padding:0;transition:border-color .2s,background .3s}
 .theme-tg:hover{border-color:rgba(255,255,255,.5)}
 .theme-tg:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.theme-tg svg{position:absolute;top:50%;width:14px;height:14px;transform:translateY(-50%);transition:opacity .3s}
-.theme-tg .tg-sun{left:7px;color:#E9C46A}
-.theme-tg .tg-moon{right:7px;color:#CFE3E5;opacity:.55}
+.theme-tg svg{position:absolute;z-index:1;top:50%;width:14px;height:14px;transform:translateY(-50%);transition:opacity .3s}
+.theme-tg .tg-sun{left:6px;color:#C98A12}
+.theme-tg .tg-moon{right:6px;color:#CFE3E5;opacity:.55}
 .theme-tg .tg-knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#F4EFE8;box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.65,0,.25,1.35),background .3s}
 html[data-theme="dark"] .theme-tg{background:rgba(120,170,175,.14)}
 html[data-theme="dark"] .theme-tg .tg-knob{transform:translateX(24px);background:#CFE3E5}
-html[data-theme="dark"] .theme-tg .tg-sun{opacity:.45}
-html[data-theme="dark"] .theme-tg .tg-moon{opacity:1}
+html[data-theme="dark"] .theme-tg .tg-sun{opacity:.45;color:#E9C46A}
+html[data-theme="dark"] .theme-tg .tg-moon{opacity:1;color:#123F44}
 .theme-tg.ft{margin-left:0}
 @media (prefers-reduced-motion:reduce){.theme-tg .tg-knob{transition:none}}
 html.theme-anim,html.theme-anim *{transition:background-color .45s ease,border-color .45s ease,color .45s ease,fill .45s ease!important}
@@ -1969,7 +1969,7 @@ function renderPay(){
       <p class="lock"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Card, Apple Pay and Google Pay accepted.</span></p>
       ${bk.pax>1?`<p class="note qty"><span>At Stripe checkout, set the quantity to</span> <b>${bk.pax}</b>.</p>`:""}
       <p class="note">Your booking reference is <b>${bkRef}</b>. We’ll confirm your place by email as soon as your deposit arrives.</p>`;
-    $("#payGo").addEventListener("click",()=>{ sendBooking("New booking – deposit checkout started"); });
+    sendBooking("New booking – reached the payment step (deposit not yet confirmed)");
   }else{
     $("#bkPay").innerHTML = `<div class="ok" aria-hidden="true">✓</div><h3 style="font-size:1.5rem">Thank you for booking</h3>
       <p>Thank you, ${d.first}. We’ve received your booking for ${bk.pax} traveller${bk.pax>1?"s":""} and will email <b>${d.email}</b> within 24 hours with a secure link to pay your <b>${gbp(m.dep)}</b> deposit.</p>
