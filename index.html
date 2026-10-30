@@ -872,6 +872,8 @@ footer{padding-block:48px}
 @media (max-width:700px){.hero h1 .hero-eyebrow,.hero h2[data-h1] .hero-eyebrow,.hero h2[data-h1] .hero-eyebrow{font-size:.8rem;letter-spacing:.14em;margin-bottom:22px}}
 .bk-why{margin:12px 0 0;padding:12px 14px;border-radius:6px;background:var(--sand);font-size:.88rem;line-height:1.55;color:var(--muted);text-align:left}
 .bk-why b{color:var(--ink);font-weight:600}
+.stripe-mount{margin:4px 0 8px;min-height:120px}
+.stripe-load{color:var(--muted);font-size:.92rem;text-align:center;padding:30px 0}
 /* ---------- Off the beaten track ---------- */
 .gems-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
 .gems-head{display:grid;gap:16px;justify-items:start;position:sticky;top:110px}
@@ -2110,6 +2112,8 @@ document.querySelectorAll(".enq-form").forEach(form=>{
    1) "Deposit – shared room"  £960 per traveller   2) "Deposit – private room" £1,155 per traveller
    Turn on "Let customers adjust quantity". Paste the links below. Until then, bookings are sent to
    Bijan by email and he follows up with a payment link. */
+const STRIPE_PK = "pk_live_51UWEiCHQWXlPluIVh7tVOAnFfXrVyNisBjb4Co5WniOPmbl7F3XMC8Ua7zj0dceheoiIlw51JM3yeuJGMIB4i8uq00jxJanS8y"; /* publishable key pk_live_… (safe to be public) */
+const PAY_API = "https://gv-payments.mute-sun-16a0.workers.dev";
 const PAYMENT_LINKS = { shared:"https://buy.stripe.com/4gM4gz7kW2dFesQaa804801", private:"https://buy.stripe.com/6oUcN57kWbOf4Sgfus04800" };
 const bk = { step:1, pax:1, room:"shared" };
 const BK = $("#bk"), BKF = $("#bkForm");
@@ -2164,10 +2168,7 @@ async function sendBooking(status){
   for(let i=2;i<=bk.pax;i++) data["traveller_"+i]=`${d["t"+i+"first"]} ${d["t"+i+"last"]}`;
   const out=await sendForm(data); if(!out.ok) console.warn("Booking not delivered:", out.msg); return out.ok;
 }
-function renderPay(){
-  const d=fd(), m=money(); const link=PAYMENT_LINKS[bk.room];
-  bkRef = "GV-" + Date.now().toString(36).toUpperCase();
-  if(link){
+function renderLinkPay(d,m,link){
     const url = link + (link.includes("?")?"&":"?") + "prefilled_email=" + encodeURIComponent(d.email) + "&client_reference_id=" + bkRef;
     $("#bkPay").innerHTML = `<p>Deposit for ${bk.pax} traveller${bk.pax>1?"s":""}</p><div class="big">${gbp(m.dep)}</div>
       <div class="stripe-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3z"/><path d="m8.8 12.2 2.2 2.2 4.2-4.4"/></svg><div><b>Secure payment with Stripe</b><span>When you continue, Stripe’s secure checkout opens in a new tab to take your deposit.</span><span>Stripe processes the payment for us, so we never see or store your card details.</span></div></div>
@@ -2176,6 +2177,32 @@ function renderPay(){
       <p class="lock"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Card, Apple Pay and Google Pay accepted.</span></p>
       ${bk.pax>1?`<p class="note qty"><span>At Stripe checkout, set the quantity to</span> <b>${bk.pax}</b>.</p>`:""}
       <p class="note">Your booking reference is <b>${bkRef}</b>. We’ll confirm your place by email as soon as your deposit arrives.</p>`;
+}
+let gvCheckout=null;
+function loadStripe(){ return window.Stripe ? Promise.resolve() : new Promise((ok,no)=>{ const sc=document.createElement("script"); sc.src="https://js.stripe.com/endive/stripe.js"; sc.onload=ok; sc.onerror=no; document.head.appendChild(sc); }); }
+function renderEmbedded(d,m,link){
+  $("#bkPay").innerHTML = `<p>Deposit for ${bk.pax} traveller${bk.pax>1?"s":""}</p><div class="big">${gbp(m.dep)}</div>
+    <div class="stripe-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3z"/><path d="m8.8 12.2 2.2 2.2 4.2-4.4"/></svg><div><b>Secure payment with Stripe</b><span>Pay your deposit securely below. Stripe processes the payment for us, so we never see or store your card details.</span></div></div>
+    <div id="stripeMount" class="stripe-mount"><p class="stripe-load">Loading secure payment…</p></div>
+    <p class="bk-why"><b>Why a 30% deposit?</b> <span>Most of the boutique hotels and riads we use ask us to pay in advance to confirm your room, so your deposit secures both your place on the tour and your accommodation.</span></p>
+    <p class="note">Your booking reference is <b>${bkRef}</b>. We’ll confirm your place by email as soon as your deposit arrives.</p>`;
+  const fail=()=>{ if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; } if(link) renderLinkPay(d,m,link); };
+  loadStripe().then(async ()=>{
+    if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; }
+    const stripe=window.Stripe(STRIPE_PK);
+    const mk = stripe.createEmbeddedCheckoutPage ? stripe.createEmbeddedCheckoutPage.bind(stripe) : stripe.initEmbeddedCheckout.bind(stripe);
+    gvCheckout = await mk({ fetchClientSecret: async ()=>{
+      const r=await fetch(PAY_API+"/create-session",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tour:"morocco2027",room:bk.room,pax:bk.pax,email:d.email,ref:bkRef,name:(d.first+" "+d.last).trim()})});
+      const j=await r.json(); if(!r.ok||!j.clientSecret) throw new Error(j.error||"No session"); return j.clientSecret; } });
+    const mt=document.getElementById("stripeMount"); if(!mt) return; mt.innerHTML=""; gvCheckout.mount("#stripeMount");
+  }).catch(e=>{ console.warn("Embedded checkout unavailable:", e); fail(); });
+}
+function renderPay(){
+  const d=fd(), m=money(); const link=PAYMENT_LINKS[bk.room];
+  bkRef = "GV-" + Date.now().toString(36).toUpperCase();
+  if(STRIPE_PK && PAY_API){ renderEmbedded(d,m,link); sendBooking("New booking – reached the payment step (deposit not yet confirmed)"); return; }
+  if(link){
+    renderLinkPay(d,m,link);
     sendBooking("New booking – reached the payment step (deposit not yet confirmed)");
   }else{
     $("#bkPay").innerHTML = `<div class="ok" aria-hidden="true">✓</div><h3 style="font-size:1.5rem">Thank you for booking</h3>
@@ -2189,7 +2216,7 @@ function renderPay(){
 }
 let lastFocus=null;
 function openBk(){ lastFocus=document.activeElement; BK.hidden=false; document.body.classList.add("bk-open"); showStep(1); $("#bkClose").focus(); }
-function closeBk(){ BK.hidden=true; document.body.classList.remove("bk-open"); lastFocus&&lastFocus.focus(); }
+function closeBk(){ if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; } BK.hidden=true; document.body.classList.remove("bk-open"); lastFocus&&lastFocus.focus(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("[data-book]"); if(t){ e.preventDefault(); openBk(); } });
 $("#bkClose").addEventListener("click",closeBk);
 BK.addEventListener("click",e=>{ if(e.target===BK) closeBk(); });
