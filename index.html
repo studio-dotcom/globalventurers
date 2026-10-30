@@ -1810,11 +1810,10 @@ document.querySelectorAll(".enq-form").forEach(form=>{
       const out = await sendForm(data);
       if(!out.ok){ console.warn("Form not delivered:", out.msg); throw new Error(out.msg); }
       form.reset();
-      say(`Thank you, ${name.split(" ")[0]}. Your enquiry has been sent and we’ll reply to ${email} within one working day.`);
+      say(`Thank you, ${name.split(" ")[0]}! Your enquiry has been sent and we’ll be in touch soon.`);
     }catch(err){
       const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCountry: ${country}\nNumber of people: ${people}\nJourney: ${TRIP.name} (${TRIP.dates})`;
-      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Enquiry: " + TRIP.name)}&body=${encodeURIComponent(body)}`;
-      say(`Thanks, ${name.split(" ")[0]}. Your email app should open with the enquiry ready to send. If it doesn't, email ${EMAIL} directly.`);
+      say(`Sorry, ${name.split(" ")[0]}, your enquiry didn’t send. Please try again in a moment, or message us on WhatsApp on +44 7935 187068.`);
     }finally{ btn.disabled = false; btn.textContent = "Send enquiry"; }
   });
 });
