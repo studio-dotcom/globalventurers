@@ -1212,7 +1212,7 @@ footer{padding-block:48px}
       <button type="button" class="btn" data-book style="width:100%">Book now · pay 30% deposit</button>
       <p class="note">Secure your place in a few minutes. Balance due 60 days before departure.</p>
       <div class="or"><span>or ask a question first</span></div>
-      <form id="enqForm" class="enq-form" action="https://formsubmit.co/contact@globalventurers.com" method="POST" novalidate>
+      <form id="enqForm" class="enq-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New enquiry: Morocco Signature Journey (10–21 October 2027)">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
@@ -1732,7 +1732,7 @@ const TRIP = { name:"Morocco Signature Journey", dates:"10 – 21 October 2027",
 const EMAIL = "contact@globalventurers.com";
 /* Form delivery. Paste a Web3Forms access key here (free at web3forms.com, sent to contact@globalventurers.com)
    to use Web3Forms; leave empty to use FormSubmit. */
-const WEB3FORMS_KEY = "";
+const WEB3FORMS_KEY = "4dfdcafa-593b-431e-b047-98a76973c655";
 async function sendForm(data){
   try{
     if(WEB3FORMS_KEY){
