@@ -870,6 +870,20 @@ footer{padding-block:48px}
 .hero h1 .h1-main,.hero h2[data-h1] .h1-main,
 .hero h2[data-h1] .h1-main{display:block}
 @media (max-width:700px){.hero h1 .hero-eyebrow,.hero h2[data-h1] .hero-eyebrow,.hero h2[data-h1] .hero-eyebrow{font-size:.8rem;letter-spacing:.14em;margin-bottom:22px}}
+/* ---------- Off the beaten track ---------- */
+.gems-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
+.gems-head{display:grid;gap:16px;justify-items:start;position:sticky;top:110px}
+.gems-note{margin:6px 0 0;padding-left:16px;border-left:2px solid var(--teal);color:var(--muted);font-size:.98rem}
+.gems{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.gems li{background:var(--bg);padding:clamp(20px,2.4vw,30px);display:grid;gap:8px;align-content:start}
+.gems h3{font-size:1.3rem}
+.gems p{margin:0;color:var(--muted);font-size:.98rem}
+.gems-perks{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:10px}
+.gems-perks li{position:relative;padding-left:28px;font-weight:500}
+.gems-perks li::before{content:"";position:absolute;left:0;top:.35em;width:16px;height:16px;border-radius:50%;background:var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4.5 8.2 2.3 2.3 4.7-4.9' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+html[data-theme="dark"] .gems-perks li::before{background-color:var(--teal-bg)}
+@media (max-width:860px){.gems-grid{grid-template-columns:1fr}.gems-head{position:static}}
+@media (max-width:560px){.gems{grid-template-columns:1fr}}
 /* ---------- Mobile usability: bigger tap targets, more legible small text ---------- */
 @media (max-width:700px){
   .tb-cta{min-height:40px}
@@ -1213,6 +1227,30 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
   </div>
 </section>
 
+<section class="gems-sec" id="hidden-gems">
+  <div class="wrap gems-grid">
+    <div class="gems-head">
+      <span class="label">Off the beaten track</span>
+      <h2>Morocco’s real hidden gems, away from the tourist crowds</h2>
+      <p class="lead">Most Morocco tours follow the same busy circuit, with coach-loads of visitors at every stop. We built this group tour around the quieter places we love: wild dunes, oasis towns and medinas where everyday life carries on as it always has.</p>
+      <p class="gems-note">We still visit Marrakech, Fes and Chefchaouen, but we go early, with local guides who know the quieter corners away from the busiest streets.</p>
+      <ul class="gems-perks">
+        <li>Boutique hotels and riads with real character</li>
+        <li>Private, air-conditioned vehicles just for our group</li>
+        <li>A small group that ends the journey as friends</li>
+      </ul>
+    </div>
+    <ul class="gems">
+      <li><h3>Erg Chegaga</h3><p>Morocco’s wildest dunes, beyond the end of the road at M’Hamid. Reached only by 4x4, they see a fraction of the visitors of the better-known Sahara camps.</p></li>
+      <li><h3>Agdz and the Draa Valley</h3><p>A quiet oasis town of palm groves and old kasbahs, where most tours simply drive straight through.</p></li>
+      <li><h3>Tetouan</h3><p>A UNESCO-listed medina shaped by Andalusian refugees, one of the best preserved and least visited in Morocco.</p></li>
+      <li><h3>Asilah</h3><p>A whitewashed seaside town of murals and ramparts on the Atlantic coast, a peaceful stop on the way to Casablanca.</p></li>
+      <li><h3>The Jebel Saghro back roads</h3><p>Quiet desert roads through Tazzarine and Alnif, linking two seas of dunes without the tour-bus traffic.</p></li>
+      <li><h3>The Middle Atlas cedar forests</h3><p>Cedar forests and alpine-style villages around Ifrane, a side of Morocco few visitors expect.</p></li>
+    </ul>
+  </div>
+</section>
+
 <section class="group-sec" id="group">
   <div class="wrap">
     <div class="head">
@@ -1523,6 +1561,7 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
       <p class="lead">Can't find your answer? Message us on WhatsApp and we’ll reply the same day.</p>
     </div>
     <div>
+      <details><summary>Is this an off-the-beaten-track Morocco tour?</summary><p>Yes. Alongside highlights like Fes and Chefchaouen, the route takes in Erg Chegaga, the Draa Valley, Tetouan and Asilah, places most group tours skip, and avoids the busiest coach-tour stops wherever we can.</p></details>
       <details><summary>How do I book?</summary><p>Tap Book your place, add your details and pay a 30% deposit securely with Stripe to confirm your place. Stripe is one of the world’s most trusted payment platforms: your card details are encrypted and never shared with us. If you prefer, you can request a payment link by email instead. The deposit is refundable within 14 days of booking, and the balance is due 60 days before departure, or you can pay in full when you book.</p></details>
       <details><summary>I'm travelling solo. Do I have to share?</summary><p>No. Choose a private room for a single supplement, or ask to share with another solo guest of the same gender.</p></details>
       <details><summary>Who is this journey for?</summary><p>Travellers who appreciate comfort, beautiful places to stay and a relaxed pace, mostly aged 30 to 65. You’ll need a reasonable level of fitness for medina walks, and there are a few longer scenic drives with comfortable stops along the way.</p></details>
