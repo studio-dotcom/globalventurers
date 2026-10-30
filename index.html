@@ -1786,10 +1786,12 @@ document.querySelectorAll(".enq-form").forEach(form=>{
     if(f("_honey").value) return;
     btn.disabled = true; btn.textContent = "Sending…";
     const data = { name, email, phone, country, people, journey: TRIP.name + " (" + TRIP.dates + ")",
+      sent_from: location.href, language: document.documentElement.lang, submitted: new Date().toLocaleString("en-GB"),
       _subject: "New enquiry: " + TRIP.name + " (" + TRIP.dates + ")", _template: "table", _captcha: "false", _replyto: email };
     try{
       const res = await fetch("https://formsubmit.co/ajax/" + EMAIL, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body: JSON.stringify(data) });
-      if(!res.ok) throw new Error("status " + res.status);
+      const out = await res.json().catch(()=>({}));
+      if(!res.ok || String(out.success)==="false") throw new Error(out.message || ("status " + res.status));
       form.reset();
       say(`Thank you, ${name.split(" ")[0]}. Your enquiry has been sent and we’ll reply to ${email} within one working day.`);
     }catch(err){
@@ -1859,7 +1861,7 @@ async function sendBooking(status){
     status, journey:`${TRIP.name} (${TRIP.dates})`, lead:`${d.first} ${d.last}`, email:d.email, phone:d.phone, country:d.country, dob:d.dob,
     travellers:bk.pax, room:bk.room, total:gbp(m.total), deposit:gbp(m.dep), notes:d.notes||"" };
   for(let i=2;i<=bk.pax;i++) data["traveller_"+i]=`${d["t"+i+"first"]} ${d["t"+i+"last"]}`;
-  try{ const r=await fetch("https://formsubmit.co/ajax/"+EMAIL,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)}); return r.ok; }catch(e){ return false; }
+  try{ const r=await fetch("https://formsubmit.co/ajax/"+EMAIL,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)}); const o=await r.json().catch(()=>({})); return r.ok && String(o.success)!=="false"; }catch(e){ return false; }
 }
 function renderPay(){
   const d=fd(), m=money(); const link=PAYMENT_LINKS[bk.room];
