@@ -870,6 +870,8 @@ footer{padding-block:48px}
 .hero h1 .h1-main,.hero h2[data-h1] .h1-main,
 .hero h2[data-h1] .h1-main{display:block}
 @media (max-width:700px){.hero h1 .hero-eyebrow,.hero h2[data-h1] .hero-eyebrow,.hero h2[data-h1] .hero-eyebrow{font-size:.8rem;letter-spacing:.14em;margin-bottom:22px}}
+.bk-why{margin:12px 0 0;padding:12px 14px;border-radius:6px;background:var(--sand);font-size:.88rem;line-height:1.55;color:var(--muted);text-align:left}
+.bk-why b{color:var(--ink);font-weight:600}
 /* ---------- Off the beaten track ---------- */
 .gems-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
 .gems-head{display:grid;gap:16px;justify-items:start;position:sticky;top:110px}
@@ -1642,6 +1644,7 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
             <input type="radio" name="room" id="bk-private" value="private"><label for="bk-private">Private room<small>£3,850 pp</small></label>
           </div></div>
         <div class="bk-sum" id="bkSum1"></div>
+        <p class="bk-why"><b>Why a 30% deposit?</b> <span>Most of the boutique hotels and riads we use ask us to pay in advance to confirm your room, so your deposit secures both your place on the tour and your accommodation.</span></p>
       </section>
       <section class="bk-step" data-step="2" hidden>
         <div class="bk-grid">
@@ -2169,6 +2172,7 @@ function renderPay(){
     $("#bkPay").innerHTML = `<p>Deposit for ${bk.pax} traveller${bk.pax>1?"s":""}</p><div class="big">${gbp(m.dep)}</div>
       <div class="stripe-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3z"/><path d="m8.8 12.2 2.2 2.2 4.2-4.4"/></svg><div><b>Secure payment with Stripe</b><span>When you continue, Stripe’s secure checkout opens in a new tab to take your deposit.</span><span>Stripe processes the payment for us, so we never see or store your card details.</span></div></div>
       <a class="btn" id="payGo" href="${url}" target="_blank" rel="noopener" style="width:100%"><span>Continue to secure payment</span> →</a>
+      <p class="bk-why"><b>Why a 30% deposit?</b> <span>Most of the boutique hotels and riads we use ask us to pay in advance to confirm your room, so your deposit secures both your place on the tour and your accommodation.</span></p>
       <p class="lock"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Card, Apple Pay and Google Pay accepted.</span></p>
       ${bk.pax>1?`<p class="note qty"><span>At Stripe checkout, set the quantity to</span> <b>${bk.pax}</b>.</p>`:""}
       <p class="note">Your booking reference is <b>${bkRef}</b>. We’ll confirm your place by email as soon as your deposit arrives.</p>`;
