@@ -874,6 +874,24 @@ footer{padding-block:48px}
 .bk-why b{color:var(--ink);font-weight:600}
 .stripe-mount{margin:4px 0 8px;min-height:120px}
 .stripe-load{color:var(--muted);font-size:.92rem;text-align:center;padding:30px 0}
+.pay-safe{display:flex;gap:14px;align-items:flex-start;text-align:left;margin:18px 0 12px;padding:16px 18px;border-radius:8px;background:rgba(7,116,125,.07);border:1px solid rgba(7,116,125,.28)}
+.pay-safe svg{width:28px;height:28px;flex:none;color:var(--teal);margin-top:2px}
+.pay-safe b{display:block;font-size:1.02rem;color:var(--ink);margin-bottom:4px}
+.pay-safe span{display:block;font-size:.92rem;line-height:1.55;color:var(--muted)}
+.pay-badges{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center}
+.pay-badges li{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:500;color:var(--ink)}
+.pay-badges svg{width:15px;height:15px;color:var(--teal)}
+.pay-express{margin-bottom:14px;width:100%;align-self:stretch}
+.pay-express:empty{display:none}
+.stripe-mount{width:100%;align-self:stretch;text-align:left}
+.pay-btn{width:100%;margin-top:18px;min-height:56px;font-size:.84rem;gap:10px}
+.pay-btn svg{width:16px;height:16px}
+.pay-btn[disabled]{opacity:.55;cursor:default}
+.pay-btn.busy{opacity:.7;cursor:progress}
+.pay-err{width:100%;box-sizing:border-box;margin:12px 0 0;padding:10px 14px;border-radius:6px;background:#FBEDEA;color:#8A2A16;font-size:.9rem;text-align:left}
+html[data-theme="dark"] .pay-err{background:#3A1F19;color:#F2B8A8}
+html[data-theme="dark"] .pay-safe{background:rgba(91,184,191,.08);border-color:rgba(91,184,191,.3)}
+.pay-powered{margin:10px 0 0;font-size:.8rem;color:var(--muted);text-align:center}
 /* ---------- Off the beaten track ---------- */
 .gems-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
 .gems-head{display:grid;gap:16px;justify-items:start;position:sticky;top:110px}
@@ -2180,23 +2198,57 @@ function renderLinkPay(d,m,link){
 }
 let gvCheckout=null;
 function loadStripe(){ return window.Stripe ? Promise.resolve() : new Promise((ok,no)=>{ const sc=document.createElement("script"); sc.src="https://js.stripe.com/endive/stripe.js"; sc.onload=ok; sc.onerror=no; document.head.appendChild(sc); }); }
+function gvPayAppearance(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  return { theme: dark?'night':'stripe', labels:'above', variables:{
+      colorPrimary: dark?'#5BB8BF':'#07747D', colorBackground: dark?'#1B1E1C':'#FFFFFF', colorText: dark?'#ECE7DF':'#1D2321',
+      colorDanger:'#B4402A', fontFamily:'"Albert Sans", "Helvetica Neue", Arial, sans-serif', fontSizeBase:'16px',
+      spacingUnit:'5px', borderRadius:'6px', gridRowSpacing:'18px' },
+    rules:{ '.Input':{ padding:'15px 14px', border: dark?'1px solid #2E3330':'1px solid #D9D2C8', boxShadow:'none' },
+      '.Input:focus':{ border:'1px solid #07747D', boxShadow:'0 0 0 3px rgba(7,116,125,.15)' },
+      '.Label':{ fontWeight:'500', marginBottom:'8px' }, '.Tab':{ padding:'14px' } } };
+}
 function renderEmbedded(d,m,link){
+  const shield='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3z"/><path d="m8.8 12.2 2.2 2.2 4.2-4.4"/></svg>';
+  const lock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>';
   $("#bkPay").innerHTML = `<p>Deposit for ${bk.pax} traveller${bk.pax>1?"s":""}</p><div class="big">${gbp(m.dep)}</div>
-    <div class="stripe-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3z"/><path d="m8.8 12.2 2.2 2.2 4.2-4.4"/></svg><div><b>Secure payment with Stripe</b><span>Pay your deposit securely below. Stripe processes the payment for us, so we never see or store your card details.</span></div></div>
+    <div class="pay-safe">${shield}<div><b>Your payment is safe and secure</b><span>Your deposit is processed by Stripe, the secure payment platform trusted by millions of businesses worldwide. Your card details are encrypted and go straight to Stripe, so we never see or store them.</span></div></div>
+    <ul class="pay-badges"><li>${lock}<span>256-bit SSL encryption</span></li><li>${shield}<span>PCI DSS Level 1 certified</span></li><li>${lock}<span>3D Secure card checks</span></li></ul>
+    <div id="payExpress" class="pay-express"></div>
     <div id="stripeMount" class="stripe-mount"><p class="stripe-load">Loading secure payment…</p></div>
+    <p class="pay-err" id="payErr" role="alert" hidden></p>
+    <button type="button" class="btn pay-btn" id="payNow" disabled>${lock}<span>Pay ${gbp(m.dep)} deposit securely</span></button>
+    <p class="pay-powered">Payments processed securely by <b>Stripe</b></p>
     <p class="bk-why"><b>Why a 30% deposit?</b> <span>Most of the boutique hotels and riads we use ask us to pay in advance to confirm your room, so your deposit secures both your place on the tour and your accommodation.</span></p>
     <p class="note">Your booking reference is <b>${bkRef}</b>. We’ll confirm your place by email as soon as your deposit arrives.</p>`;
-  const fail=()=>{ if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; } if(link) renderLinkPay(d,m,link); };
+  const fail=()=>{ if(gvCheckout){ try{gvCheckout.destroy&&gvCheckout.destroy()}catch(e){} gvCheckout=null; } if(link) renderLinkPay(d,m,link); };
+  const getSession=async(ui)=>{ const r=await fetch(PAY_API+"/create-session",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tour:"morocco2027",ui,room:bk.room,pax:bk.pax,email:d.email,ref:bkRef,name:(d.first+" "+d.last).trim()})});
+      const j=await r.json(); if(!r.ok||!j.clientSecret) throw new Error(j.error||"No session"); return j; };
   loadStripe().then(async ()=>{
-    if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; }
+    if(gvCheckout){ try{gvCheckout.destroy&&gvCheckout.destroy()}catch(e){} gvCheckout=null; }
     const stripe=window.Stripe(STRIPE_PK);
-    const mk = stripe.createEmbeddedCheckoutPage ? stripe.createEmbeddedCheckoutPage.bind(stripe) : stripe.initEmbeddedCheckout.bind(stripe);
-    gvCheckout = await mk({ fetchClientSecret: async ()=>{
-      const r=await fetch(PAY_API+"/create-session",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tour:"morocco2027",room:bk.room,pax:bk.pax,email:d.email,ref:bkRef,name:(d.first+" "+d.last).trim()})});
-      const j=await r.json(); if(!r.ok||!j.clientSecret) throw new Error(j.error||"No session"); return j.clientSecret; } });
-    const mt=document.getElementById("stripeMount"); if(!mt) return; mt.innerHTML=""; gvCheckout.mount("#stripeMount");
+    const sess=await getSession("elements");
+    const mt=document.getElementById("stripeMount"); if(!mt) return;
+    if(sess.ui!=="elements" || !stripe.initCheckoutElementsSdk){
+      /* older Worker: Stripe's own compact form */
+      $("#payNow").hidden=true; document.querySelector(".pay-powered").hidden=true;
+      const mk = stripe.createEmbeddedCheckoutPage ? stripe.createEmbeddedCheckoutPage.bind(stripe) : stripe.initEmbeddedCheckout.bind(stripe);
+      gvCheckout = await mk({ fetchClientSecret: async()=>sess.clientSecret }); mt.innerHTML=""; gvCheckout.mount("#stripeMount"); return;
+    }
+    const checkout = stripe.initCheckoutElementsSdk({ clientSecret: Promise.resolve(sess.clientSecret), elementsOptions:{ appearance: gvPayAppearance(), fonts:[{cssSrc:"https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&display=swap"}] } });
+    gvCheckout = checkout;
+    const err=t=>{ const e=$("#payErr"); if(!e) return; e.textContent=t||""; e.hidden=!t; };
+    const confirm=async(extra)=>{ err(""); const b=$("#payNow"); if(b){ b.disabled=true; b.classList.add("busy"); }
+      const res=await checkout.loadActions(); if(res.type==="error"){ err(res.error.message); if(b){b.disabled=false;b.classList.remove("busy");} return; }
+      const out=await res.actions.confirm(extra||{}); if(out && out.error){ err(out.error.message); if(b){b.disabled=false;b.classList.remove("busy");} } };
+    try{ const ex=checkout.createExpressCheckoutElement({buttonHeight:48}); ex.mount("#payExpress"); ex.on("confirm",e=>confirm({expressCheckoutConfirmEvent:e})); }catch(e){}
+    const pe=checkout.createPaymentElement({layout:{type:"tabs"}});
+    mt.innerHTML=""; pe.mount("#stripeMount");
+    pe.on("ready",()=>{ const b=$("#payNow"); if(b) b.disabled=false; });
+    $("#payNow").addEventListener("click",()=>confirm());
   }).catch(e=>{ console.warn("Embedded checkout unavailable:", e); fail(); });
 }
+
 function renderPay(){
   const d=fd(), m=money(); const link=PAYMENT_LINKS[bk.room];
   bkRef = "GV-" + Date.now().toString(36).toUpperCase();
