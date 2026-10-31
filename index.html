@@ -332,6 +332,8 @@ footer .logo-svg{height:36px}
 .bk-steps li::before{content:counter(s) ". "}
 .bk-steps li.on{color:var(--teal);border-top-color:var(--teal);font-weight:600}
 .bk-steps li.done{border-top-color:var(--teal)}
+.bk-steps li.can{cursor:pointer;color:var(--ink)}
+.bk-steps li.can:hover,.bk-steps li.can:focus-visible{color:var(--teal);text-decoration:underline;text-underline-offset:4px;outline:none}
 #bkForm{display:grid;gap:20px;background:none;padding:0;border:0;grid-template-columns:1fr}
 .bk-step{display:grid;gap:18px;padding:0}
 .bk-step[hidden]{display:none}
@@ -2150,8 +2152,11 @@ function showStep(n){
   BKF.querySelectorAll(".bk-step").forEach(s=>s.hidden = +s.dataset.step!==n);
   document.querySelectorAll(".bk-steps li").forEach(li=>{const s=+li.dataset.s; li.classList.toggle("on",s===n); li.classList.toggle("done",s<n);});
   $("#bkErr").hidden=true;
-  $("#bkBack").style.visibility = n===1||n===4 ? "hidden" : "visible";
-  const next=$("#bkNext"); next.hidden = n===4; next.style.display = n===4 ? "none" : ""; $("#bkBack").style.display = n===4 ? "none" : "";
+  $("#bkBack").style.visibility = n===1 ? "hidden" : "visible";
+  const next=$("#bkNext"); next.hidden = n===4; next.style.display = n===4 ? "none" : ""; $("#bkBack").style.display = "";
+  $("#bkBack").textContent = n===4 ? "← Back to review" : "Back";
+  if(n!==4 && gvCheckout){ try{gvCheckout.destroy&&gvCheckout.destroy()}catch(e){} gvCheckout=null; }
+  document.querySelectorAll(".bk-steps li").forEach(li=>{const s=+li.dataset.s, can=s<n; li.tabIndex=can?0:-1; li.setAttribute("role",can?"button":"listitem"); li.classList.toggle("can",can); if(can) li.setAttribute("aria-label","Go back to step "+s); else li.removeAttribute("aria-label");});
   next.textContent = n===3 ? `Continue to payment` : "Continue";
   if(n===1) $("#bkSum1").innerHTML=sumHTML();
   if(n===2) renderOthers();
@@ -2177,7 +2182,7 @@ function bookingText(d,m){
   const others=[]; for(let i=2;i<=bk.pax;i++) others.push(`${d["t"+i+"first"]} ${d["t"+i+"last"]}`);
   return `Booking: ${TRIP.name} (${TRIP.dates})\nLead: ${d.first} ${d.last}\nEmail: ${d.email}\nPhone: ${d.phone}\nCountry: ${d.country}\nDate of birth: ${d.dob}\nTravellers: ${bk.pax}${others.length?" ("+others.join(", ")+")":""}\nRoom: ${bk.room}\nTotal: ${gbp(m.total)}\nDeposit (30%): ${gbp(m.dep)}\nNotes: ${d.notes||"-"}`;
 }
-let bkRef="";
+let bkRef="", bkSent="";
 async function sendBooking(status){
   const d=fd(), m=money();
   const data={ _subject:`🎉 Nice one, you’ve got another tour booking request! Keep it up!! – ${d.first} ${d.last} (${bk.pax} pax) · ${TRIP.name}`, _template:"table", _captcha:"false", _replyto:d.email, reference:bkRef,
@@ -2251,11 +2256,13 @@ function renderEmbedded(d,m,link){
 
 function renderPay(){
   const d=fd(), m=money(); const link=PAYMENT_LINKS[bk.room];
-  bkRef = "GV-" + Date.now().toString(36).toUpperCase();
-  if(STRIPE_PK && PAY_API){ renderEmbedded(d,m,link); sendBooking("New booking – reached the payment step (deposit not yet confirmed)"); return; }
+  if(!bkRef) bkRef = "GV-" + Date.now().toString(36).toUpperCase();
+  const sig=JSON.stringify([d.first,d.last,d.email,d.phone,bk.pax,bk.room]);
+  const mail=()=>{ if(sig===bkSent) return; const st = bkSent ? "Updated booking – details changed before payment (deposit not yet confirmed)" : "New booking – reached the payment step (deposit not yet confirmed)"; bkSent=sig; sendBooking(st); };
+  if(STRIPE_PK && PAY_API){ renderEmbedded(d,m,link); mail(); return; }
   if(link){
     renderLinkPay(d,m,link);
-    sendBooking("New booking – reached the payment step (deposit not yet confirmed)");
+    mail();
   }else{
     $("#bkPay").innerHTML = `<div class="ok" aria-hidden="true">✓</div><h3 style="font-size:1.5rem">Thank you for booking</h3>
       <p>Thank you, ${d.first}. We’ve received your booking for ${bk.pax} traveller${bk.pax>1?"s":""} and will email <b>${d.email}</b> within 24 hours with a secure link to pay your <b>${gbp(m.dep)}</b> deposit.</p>
@@ -2267,7 +2274,7 @@ function renderPay(){
   }
 }
 let lastFocus=null;
-function openBk(){ lastFocus=document.activeElement; BK.hidden=false; document.body.classList.add("bk-open"); showStep(1); $("#bkClose").focus(); }
+function openBk(){ bkRef=""; bkSent=""; lastFocus=document.activeElement; BK.hidden=false; document.body.classList.add("bk-open"); showStep(1); $("#bkClose").focus(); }
 function closeBk(){ if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; } BK.hidden=true; document.body.classList.remove("bk-open"); lastFocus&&lastFocus.focus(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("[data-book]"); if(t){ e.preventDefault(); openBk(); } });
 $("#bkClose").addEventListener("click",closeBk);
@@ -2282,6 +2289,8 @@ BKF.addEventListener("submit",e=>e.preventDefault());
 BKF.addEventListener("input",()=>{ $("#bkErr").hidden=true; });
 $("#bkNext").addEventListener("click",()=>{ if(!validate(bk.step)) return; showStep(bk.step+1); });
 $("#bkBack").addEventListener("click",()=>showStep(Math.max(1,bk.step-1)));
+document.querySelector(".bk-steps").addEventListener("click",e=>{ const li=e.target.closest("li.can"); if(li) showStep(+li.dataset.s); });
+document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.target.closest("li.can"); if(li&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); showStep(+li.dataset.s); } });
 
 /* ---------- Pages: home (/) and the Morocco journey (/morocco/) ---------- */
 (function(){
