@@ -908,6 +908,25 @@ html[data-theme="dark"] .pay-safe{background:rgba(91,184,191,.08);border-color:r
 html[data-theme="dark"] .gems-perks li::before{background-color:var(--teal-bg)}
 @media (max-width:860px){.gems-grid{grid-template-columns:1fr}.gems-head{position:static}}
 @media (max-width:560px){.gems{grid-template-columns:1fr}}
+/* comparison */
+.cmp{margin-top:clamp(48px,7vw,88px)}
+.cmp-title{font-size:clamp(1.6rem,1.2rem + 1.4vw,2.3rem);margin:0 0 10px}
+.cmp-lead{color:var(--muted);margin:0 0 24px;max-width:640px}
+.cmp-head{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;padding:0 20px 10px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.cmp-head span:first-child{color:var(--muted)}
+.cmp-head span:last-child{color:var(--teal)}
+.cmp-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cmp-list li{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;padding:16px 20px;border-top:1px solid var(--line);align-items:center}
+.cmp-list li:first-child{border-top:0}
+.cmp-list li:nth-child(odd){background:var(--sand)}
+.cmp-no,.cmp-yes{position:relative;padding-left:30px;line-height:1.45}
+.cmp-no{color:var(--muted)}
+.cmp-yes{font-weight:500;color:var(--ink)}
+.cmp-no::before,.cmp-yes::before{position:absolute;left:0;top:.05em;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:700}
+.cmp-no::before{content:"✕";background:rgba(98,106,103,.15);color:var(--muted)}
+.cmp-yes::before{content:"✓";background:var(--teal);color:#fff}
+html[data-theme="dark"] .cmp-yes::before{background:var(--teal-bg)}
+@media (max-width:640px){.cmp-head{display:none}.cmp-list li{grid-template-columns:1fr;gap:8px}}
 /* ---------- Mobile usability: bigger tap targets, more legible small text ---------- */
 @media (max-width:700px){
   .tb-cta{min-height:40px}
@@ -1270,6 +1289,12 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
       <li><h3>Tetouan</h3><p>A UNESCO-listed medina shaped by Andalusian refugees, one of the best preserved and least visited in Morocco.</p></li>
       <li><h3>Tangier and its hidden beaches</h3><p>Two nights in beautiful Tangier, with time on the quiet beaches of Dalia and Playa Belyounech, facing Spain across the Strait of Gibraltar, where very few travellers ever go.</p></li>
     </ul>
+  </div>
+  <div class="wrap cmp">
+    <h3 class="cmp-title">Not your usual group tour</h3>
+    <p class="cmp-lead">Here’s how this journey compares with the big group tours on Morocco’s busy tourist routes.</p>
+    <div class="cmp-head" aria-hidden="true"><span>Typical big group tour</span><span>The Global Venturers way</span></div>
+    <ul class="cmp-list"><li><span class="cmp-no">30 to 50 people on a coach</span><span class="cmp-yes">8 travellers at most, in private air-conditioned vehicles</span></li><li><span class="cmp-no">Big chain hotels on the edge of town</span><span class="cmp-yes">Boutique riads and hotels with real character</span></li><li><span class="cmp-no">The same crowded stops as everyone else</span><span class="cmp-yes">Hidden gems like Erg Chegaga, Agdz, Tetouan and Tangier’s quiet beaches</span></li><li><span class="cmp-no">Rushed days and early starts, every day</span><span class="cmp-yes">Relaxed mornings and two nights in the Sahara and Tangier</span></li><li><span class="cmp-no">A different guide at every stop</span><span class="cmp-yes">Led in person by our founder, explorer Bijan Paul</span></li><li><span class="cmp-no">Strangers on a bus</span><span class="cmp-yes">A small group that leaves as friends</span></li></ul>
   </div>
 </section>
 
