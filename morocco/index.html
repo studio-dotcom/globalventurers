@@ -2596,9 +2596,8 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
   function openModal(){lastFocus=document.activeElement;an.checked=window.gvConsent==='accepted';modal.hidden=false;document.getElementById('ckmYes').focus();if(window.__lenis)__lenis.stop()}
   function closeModal(){modal.hidden=true;if(window.__lenis)__lenis.start();if(lastFocus&&lastFocus.focus&&document.contains(lastFocus))lastFocus.focus()}
   function choose(v){set(v);hideBar();if(!modal.hidden)closeModal()}
-  window.gvConsent=get();
-  /* Load analytics only when window.gvConsent==='accepted' (listen for the gv:consent event). */
-  if(!window.gvConsent) setTimeout(showBar,700);
+  /* Banner switched off for now: analytics runs by default; visitors can opt out via 'Cookie settings' in the footer. */
+  window.gvConsent=get()||'accepted';
   document.getElementById('ckYes').onclick=function(){choose('accepted')};
   document.getElementById('ckNo').onclick=function(){choose('declined')};
   document.getElementById('ckmYes').onclick=function(){choose('accepted')};
