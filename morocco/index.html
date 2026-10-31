@@ -2213,6 +2213,7 @@ document.querySelectorAll(".enq-form").forEach(form=>{
       if(!out.ok){ console.warn("Form not delivered:", out.msg); throw new Error(out.msg); }
       form.reset();
       say(`Thank you, ${name.split(" ")[0]}! Your enquiry has been sent and we’ll be in touch soon.`);
+      if(window.gvTrack) gvTrack("generate_lead",{form:"enquiry"});
     }catch(err){
       const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCountry: ${country}\nNumber of people: ${people}\nJourney: ${TRIP.name} (${TRIP.dates})`;
       say(`Sorry, ${name.split(" ")[0]}, your enquiry didn’t send. Please try again in a moment, or message us on WhatsApp on +44 7935 187068.`);
@@ -2352,6 +2353,7 @@ function renderPay(){
   if(!bkRef) bkRef = "GV-" + Date.now().toString(36).toUpperCase();
   const sig=JSON.stringify([d.first,d.last,d.email,d.phone,bk.pax,bk.room]);
   const mail=()=>{ if(sig===bkSent) return; const st = bkSent ? "Updated booking – details changed before payment (deposit not yet confirmed)" : "New booking – reached the payment step (deposit not yet confirmed)"; bkSent=sig; sendBooking(st); };
+  if(window.gvTrack) gvTrack("begin_checkout",{currency:"GBP",value:m.dep,items:[{item_name:TRIP.name,quantity:bk.pax}]});
   if(STRIPE_PK && PAY_API){ renderEmbedded(d,m,link); mail(); return; }
   if(link){
     renderLinkPay(d,m,link);
@@ -2367,7 +2369,7 @@ function renderPay(){
   }
 }
 let lastFocus=null;
-function openBk(){ bkRef=""; bkSent=""; lastFocus=document.activeElement; BK.hidden=false; document.body.classList.add("bk-open"); showStep(1); $("#bkClose").focus(); }
+function openBk(){ if(window.gvTrack) gvTrack("booking_open",{tour:TRIP.name}); bkRef=""; bkSent=""; lastFocus=document.activeElement; BK.hidden=false; document.body.classList.add("bk-open"); showStep(1); $("#bkClose").focus(); }
 function closeBk(){ if(gvCheckout){ try{gvCheckout.destroy()}catch(e){} gvCheckout=null; } BK.hidden=true; document.body.classList.remove("bk-open"); lastFocus&&lastFocus.focus(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("[data-book]"); if(t){ e.preventDefault(); openBk(); } });
 $("#bkClose").addEventListener("click",closeBk);
@@ -2607,6 +2609,29 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
   modal.addEventListener('click',function(e){if(e.target===modal)closeModal()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeModal()});
   [].forEach.call(document.querySelectorAll('.ck-open'),function(b){b.onclick=openModal});
+})();
+</script>
+<script>
+/* Google Analytics 4: only loads after the visitor accepts cookies (GDPR). Set GA_ID to your Measurement ID (G-XXXXXXXXXX). */
+(function(){
+  var GA_ID = "G-W7CK6L0NY0";
+  window.gvTrack=function(){};
+  if(!GA_ID) return;
+  var loaded=false, last="";
+  function page(){ var p=location.pathname+location.hash; if(p===last) return; last=p; gtag('event','page_view',{page_location:location.href,page_path:p,page_title:document.title}); }
+  function load(){
+    if(loaded) return; loaded=true;
+    window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments)};
+    gtag('js',new Date()); gtag('config',GA_ID,{send_page_view:false,anonymize_ip:true});
+    var sc=document.createElement('script'); sc.async=true; sc.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID; document.head.appendChild(sc);
+    window.gvTrack=function(name,params){ try{ gtag('event',name,params||{}); }catch(e){} };
+    setTimeout(page,300);
+    ['pushState','replaceState'].forEach(function(k){ var o=history[k]; history[k]=function(){ var r=o.apply(this,arguments); setTimeout(page,600); return r; }; });
+    addEventListener('popstate',function(){setTimeout(page,600)}); addEventListener('hashchange',function(){setTimeout(page,600)});
+    if(/[?&]paid=1/.test(location.search)) gvTrack('deposit_paid',{tour:'Morocco Signature Journey'});
+  }
+  if(window.gvConsent==='accepted') load();
+  document.addEventListener('gv:consent',function(e){ if(e.detail==='accepted') load(); });
 })();
 </script>
 <script>
