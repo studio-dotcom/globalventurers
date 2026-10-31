@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7CK6L0NY0"></script>
+<script>
+  try{if(localStorage.getItem('gvConsent')==='declined')window['ga-disable-G-W7CK6L0NY0']=true}catch(e){}
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W7CK6L0NY0');
+</script>
 <title>Premium Group Tours to Morocco | Global Venturers</title>
 <meta name="description" content="Global Venturers runs premium group tours to Morocco for max 8 guests: boutique riads, a Sahara desert camp and beautiful places off the tourist trail.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
@@ -2611,26 +2621,72 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
 })();
 </script>
 <script>
-/* Google Analytics 4: only loads after the visitor accepts cookies (GDPR). Set GA_ID to your Measurement ID (G-XXXXXXXXXX). */
+/* Google Analytics 4 events. The Google tag itself is at the top of <head> (page views, scrolls, outbound links, form use and history page changes are automatic). */
 (function(){
-  var GA_ID = "G-W7CK6L0NY0";
-  window.gvTrack=function(){};
-  if(!GA_ID) return;
-  var loaded=false, last="";
-  function page(){ var p=location.pathname+location.hash; if(p===last) return; last=p; gtag('event','page_view',{page_location:location.href,page_path:p,page_title:document.title}); }
-  function load(){
-    if(loaded) return; loaded=true;
-    window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments)};
-    gtag('js',new Date()); gtag('config',GA_ID,{send_page_view:false,anonymize_ip:true});
-    var sc=document.createElement('script'); sc.async=true; sc.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID; document.head.appendChild(sc);
-    window.gvTrack=function(name,params){ try{ gtag('event',name,params||{}); }catch(e){} };
-    setTimeout(page,300);
-    ['pushState','replaceState'].forEach(function(k){ var o=history[k]; history[k]=function(){ var r=o.apply(this,arguments); setTimeout(page,600); return r; }; });
-    addEventListener('popstate',function(){setTimeout(page,600)}); addEventListener('hashchange',function(){setTimeout(page,600)});
-    if(/[?&]paid=1/.test(location.search)) gvTrack('deposit_paid',{tour:'Morocco Signature Journey'});
+  var GA_ID="G-W7CK6L0NY0";
+  function on(){ return window.gvConsent!=='declined' && typeof window.gtag==='function'; }
+  window.gvTrack=function(name,params){ if(!on()) return; try{ gtag('event',name,Object.assign({page_path:location.pathname+location.hash},params||{})); }catch(e){} };
+  document.addEventListener('gv:consent',function(e){ window['ga-disable-'+GA_ID]=(e.detail==='declined'); });
+  var T=window.gvTrack, txt=function(el){ return (el.getAttribute('aria-label')||el.textContent||'').replace(/\s+/g,' ').trim().slice(0,90); };
+  function where(el){ if(el.closest('.topbar,.tb,#topbar'))return 'top_bar'; if(el.closest('header,.nav'))return 'menu'; if(el.closest('footer,.site-foot'))return 'footer'; if(el.closest('#bk,.bk'))return 'booking_form'; if(el.closest('.hero'))return 'hero'; var s=el.closest('section[id]'); return s?s.id:'page'; }
+
+  /* Clicks: WhatsApp, email, phone, booking buttons, menu, buttons and links */
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('.acc-btn,a,button,summary,[data-theme-tg],.lang-menu li,.bk-steps li'); if(!el) return;
+    var h=el.getAttribute('href')||'', loc=where(el), label=txt(el);
+    if(/wa\.me|whatsapp/i.test(h)) return T('whatsapp_click',{location:el.id==='waBtn'?'floating_button':loc,link_text:label});
+    if(/^mailto:/i.test(h)) return T('email_click',{location:loc});
+    if(/^tel:/i.test(h)) return T('phone_click',{location:loc});
+    if(el.matches('[data-book],[href="/morocco/#book"]')) return T('book_now_click',{location:loc,link_text:label});
+    if(el.matches('summary')){ var d=el.parentElement; if(d && !d.open) T('faq_open',{question:label,location:loc}); return; }
+    if(el.matches('[data-theme-tg]')) return T('theme_toggle',{theme:document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'});
+    if(el.matches('.lang-menu li')) return T('language_change',{language:el.dataset.l,location:'top_bar'});
+    if(el.matches('.bk-steps li')) return T('booking_step_jump',{to_step:el.dataset.s});
+    if(el.id==='expandAll') return T('itinerary_expand_all',{});
+    if(el.matches('.acc-btn')){ if(el.getAttribute('aria-expanded')!=='true') T('itinerary_day_open',{day:label}); return; }
+    if(el.closest('.ck-open')) return T('cookie_settings_open',{});
+    if(/tripadvisor|google\.[a-z.]+\/maps|g\.page/i.test(h)) return T('review_link_click',{link_url:h,link_text:label});
+    if(/instagram|facebook/i.test(h)) return T('social_click',{link_url:h});
+    if(el.tagName==='A' && h && !/^https?:/i.test(h)) return T(loc==='menu'?'menu_click':'internal_link_click',{link_text:label,link_url:h,location:loc});
+    if(el.tagName==='BUTTON' || el.classList.contains('btn')) return T('button_click',{button_text:label,button_id:el.id||'',location:loc});
+  },true);
+
+  /* Itinerary day opened (any <details> inside the itinerary) */
+  document.addEventListener('toggle',function(e){ var d=e.target; if(!d.open||!d.closest||!d.closest('#itinerary,.itin,.days')) return; var s=d.querySelector('summary'); T('itinerary_day_open',{day:s?txt(s):''}); },true);
+
+  /* Footer language select, booking form fields */
+  document.addEventListener('change',function(e){ var x=e.target;
+    if(x.matches('.ft-lang-sel')) return T('language_change',{language:x.value,location:'footer'});
+    if(x.closest('#bk,.bk') && x.name){ if(/room/i.test(x.name)) T('room_select',{room:x.value}); else if(/pax|travellers|guests/i.test(x.name)) T('travellers_change',{travellers:x.value}); }
+  },true);
+
+  /* First interaction with any form */
+  var started={};
+  document.addEventListener('focusin',function(e){ var f=e.target.closest&&e.target.closest('form'); if(!f) return; var k=f.id||f.className||'form'; if(started[k]) return; started[k]=1; T(f.closest('#bk,.bk')?'booking_form_start':'enquiry_start',{form:k}); });
+
+  /* Booking steps (1 details, 2 travellers, 3 review, 4 payment) */
+  var names={1:'details',2:'travellers',3:'review',4:'payment'};
+  var wrap=function(){ if(typeof window.showStep!=='function') return; var o=window.showStep; window.showStep=function(n){ var r=o.apply(this,arguments); T('booking_step',{step:n,step_name:names[n]||String(n)}); if(n===4) T('add_payment_info',{currency:'GBP'}); return r; }; };
+  wrap();
+
+  /* Payment / form errors shown to visitors */
+  ['bkErr','payErr'].forEach(function(id){ var el=document.getElementById(id); if(!el||!window.MutationObserver) return; new MutationObserver(function(){ if(!el.hidden && el.textContent.trim()) T(id==='payErr'?'payment_error':'booking_form_error',{message:el.textContent.trim().slice(0,100)}); }).observe(el,{attributes:true,childList:true,characterData:true,subtree:true}); });
+
+  /* Which sections people actually see */
+  if('IntersectionObserver' in window){
+    var seen={}, io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(!en.isIntersecting) return; var el=en.target, k=(location.pathname)+'|'+(el.id||el.className); if(seen[k]) return; seen[k]=1; var h=el.querySelector('h1,h2,[data-h1]'); T('section_view',{section:el.id||el.className.split(' ')[0],section_title:h?txt(h):''}); }); },{rootMargin:'-45% 0px -45% 0px'});
+    document.querySelectorAll('section[id],#itinMap,.cmp,.gems-sec,.ft-trust').forEach(function(s){ io.observe(s); });
   }
-  if(window.gvConsent==='accepted') load();
-  document.addEventListener('gv:consent',function(e){ if(e.detail==='accepted') load(); });
+
+  /* Scroll depth per page (25/50/75/90%) */
+  var marks={}; function depth(){ var d=document.documentElement, max=d.scrollHeight-innerHeight; if(max<200) return; var p=Math.round(scrollY/max*100); [25,50,75,90].forEach(function(m){ var k=location.pathname+m; if(p>=m&&!marks[k]){ marks[k]=1; T('scroll_depth',{percent:m}); } }); }
+  addEventListener('scroll',function(){ clearTimeout(depth.t); depth.t=setTimeout(depth,250); },{passive:true});
+
+  /* Time on page milestones */
+  [30,60,120,300].forEach(function(s){ setTimeout(function(){ if(document.visibilityState==='visible') T('time_on_site',{seconds:s}); },s*1000); });
+
+  /* Successful deposit (return from Stripe) */
+  if(/[?&]paid=1/.test(location.search)) T('deposit_paid',{tour:'Morocco Signature Journey',currency:'GBP'});
 })();
 </script>
 <script>
