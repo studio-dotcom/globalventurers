@@ -2263,7 +2263,7 @@ function bookingText(d,m){
 let bkRef="", bkSent="";
 async function sendBooking(status){
   const d=fd(), m=money();
-  const data={ _subject:`🎉 Nice one, you’ve got another tour booking request! Keep it up!! – ${d.first} ${d.last} (${bk.pax} pax) · ${TRIP.name}`, _template:"table", _captcha:"false", _replyto:d.email, reference:bkRef,
+  const data={ _subject:`Tour Booking Request`, message:`You’ve got another tour booking request! Keep it up!! – ${d.first} ${d.last} (${bk.pax} pax) · ${TRIP.name}`, _template:"table", _captcha:"false", _replyto:d.email, reference:bkRef,
     status, journey:`${TRIP.name} (${TRIP.dates})`, lead:`${d.first} ${d.last}`, email:d.email, phone:d.phone, country:d.country, dob:d.dob,
     travellers:bk.pax, room:bk.room, total:gbp(m.total), deposit:gbp(m.dep), notes:d.notes||"" };
   for(let i=2;i<=bk.pax;i++) data["traveller_"+i]=`${d["t"+i+"first"]} ${d["t"+i+"last"]}`;
