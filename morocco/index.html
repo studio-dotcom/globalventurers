@@ -22,6 +22,9 @@
 <link rel="preload" as="image" href="/img/bluedune-wide.webp" media="(min-width:701px)" fetchpriority="high">
 <link rel="preload" as="image" href="/img/bluedune-m.webp" media="(max-width:700px)" fetchpriority="high">
 <link rel="preload" href="/fonts/f-36b347c9ee.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -1259,7 +1262,7 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
         <div><dt>Offices</dt><dd><span class="ft-office"><b>UK</b> – 6 Mc Williams Close, Talbot Village, United Kingdom</span><span class="ft-office"><b>Morocco</b> – 6 Rue Hafid Ibrahim, Residences De Marrakech</span></dd></div>
         <div><dt>Company</dt><dd>Creative Capsule Ltd<br>Company no. 08023109<br>Registered in England &amp; Wales</dd></div>
       </dl>
-      <p class="ft-note">Global Venturers is a founder-led tour operator. If we ever cancel a departure, you receive a full refund of everything you’ve paid. We bring more than ten years of experience organising tours in Morocco, with over 200 tours successfully delivered.</p>
+      <p class="ft-note">Global Venturers runs premium small-group tours to Morocco: max 8 guests, boutique riads, private air-conditioned transport and hidden gems most tours miss. Founder-led, with over ten years and 200+ tours delivered in Morocco. If we ever cancel a departure, you get a full refund.</p>
     </div>
     <div class="ft-trust" aria-label="Secure booking">
       <ul class="ft-trust-list">
@@ -1726,7 +1729,7 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
         <div><dt>Offices</dt><dd><span class="ft-office"><b>UK</b> – 6 Mc Williams Close, Talbot Village, United Kingdom</span><span class="ft-office"><b>Morocco</b> – 6 Rue Hafid Ibrahim, Residences De Marrakech</span></dd></div>
         <div><dt>Company</dt><dd>Creative Capsule Ltd<br>Company no. 08023109<br>Registered in England &amp; Wales</dd></div>
       </dl>
-      <p class="ft-note">Global Venturers is a founder-led tour operator. If we ever cancel a departure, you receive a full refund of everything you’ve paid. We bring more than ten years of experience organising tours in Morocco, with over 200 tours successfully delivered.</p>
+      <p class="ft-note">Global Venturers runs premium small-group tours to Morocco: max 8 guests, boutique riads, private air-conditioned transport and hidden gems most tours miss. Founder-led, with over ten years and 200+ tours delivered in Morocco. If we ever cancel a departure, you get a full refund.</p>
     </div>
     <div class="ft-trust" aria-label="Secure booking">
       <ul class="ft-trust-list">
@@ -2034,7 +2037,7 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
         <div><dt>Offices</dt><dd><span class="ft-office"><b>UK</b> – 6 Mc Williams Close, Talbot Village, United Kingdom</span><span class="ft-office"><b>Morocco</b> – 6 Rue Hafid Ibrahim, Residences De Marrakech</span></dd></div>
         <div><dt>Company</dt><dd>Creative Capsule Ltd<br>Company no. 08023109<br>Registered in England &amp; Wales</dd></div>
       </dl>
-      <p class="ft-note">Global Venturers is a founder-led tour operator. If we ever cancel a departure, you receive a full refund of everything you’ve paid. We bring more than ten years of experience organising tours in Morocco, with over 200 tours successfully delivered.</p>
+      <p class="ft-note">Global Venturers runs premium small-group tours to Morocco: max 8 guests, boutique riads, private air-conditioned transport and hidden gems most tours miss. Founder-led, with over ten years and 200+ tours delivered in Morocco. If we ever cancel a departure, you get a full refund.</p>
     </div>
     <div class="ft-trust" aria-label="Secure booking">
       <ul class="ft-trust-list">
@@ -2400,7 +2403,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
 /* ---------- Pages: home (/) and the Morocco journey (/morocco/) ---------- */
 (function(){
   const home = document.getElementById("home"), tour = document.getElementById("tourView"), legal = document.getElementById("legalView");
-  const TITLES = { home:"Premium Group Tours to Morocco | Global Venturers", tour:"Premium Morocco Group Tour, 12 Days · Boutique Riads & Sahara" };
+  const TITLES = { home:"Premium Group Tours to Morocco, Max 8 Guests | Global Venturers", tour:"Premium Morocco Group Tour, 12 Days · Boutique Riads & Sahara" };
   const norm = p => { p = p.replace(/index\.html$/,""); if(/\/morocco$/.test(p)) p += "/"; return /\/morocco\/$/.test(p) ? "/morocco/" : "/"; };
   const isFile = location.protocol === "file:";
   const pageOf = () => isFile ? (window.GV_PAGE || "/") : norm(location.pathname);
