@@ -938,6 +938,21 @@ html[data-theme="dark"] .launch-note b{color:#D9B76E}
 .first-dep{display:inline-flex;align-items:center;gap:10px;margin:14px 0 0;padding:8px 14px;border-radius:999px;background:#141414;color:#E8CF95;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
 @media (prefers-reduced-motion:reduce){.new-pill .dot::after,.first-dep .dot::after{animation:none}}
 @media (max-width:700px){.new-pill{font-size:.72rem;letter-spacing:.1em}}
+/* reviews */
+.reviews .head{max-width:760px}
+.rv-note{margin:14px 0 0;padding:12px 16px;border-radius:8px;background:var(--sand);color:var(--muted);font-size:.95rem}
+.rv-note b{color:var(--ink)}
+.rv-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:32px}
+@media (max-width:1000px){.rv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.rv-grid{grid-template-columns:1fr}}
+.rv{margin:0;padding:22px 20px;border:1px solid var(--line);border-radius:8px;background:var(--card);display:grid;gap:14px;align-content:start}
+.rv-q{font-family:var(--f-head);font-size:3rem;line-height:.6;color:#C9A45C;height:22px}
+.rv blockquote{margin:0;font-family:var(--f-head);font-weight:300;font-size:1.12rem;line-height:1.4;color:var(--ink)}
+.rv figcaption{display:grid;gap:2px;font-size:.88rem;color:var(--muted)}
+.rv figcaption b{color:var(--ink);font-weight:600}
+.rv-src{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-top:4px}
+.rv-more{margin:24px 0 0}
+.rv-more a{color:var(--teal);font-weight:500;text-underline-offset:4px}
 /* ---------- Mobile usability: bigger tap targets, more legible small text ---------- */
 @media (max-width:700px){
   .tb-cta{min-height:40px}
@@ -1154,6 +1169,18 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
       </table>
     </div>
     <p class="dep-note">More departures for 2027 and 2028 will be announced soon.</p>
+  </div>
+</section>
+
+<section class="reviews" id="reviews-home">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">From our private tours</span>
+      <h2>What travellers say about Moroccan Ventures</h2>
+      <p class="rv-note"><b>Please note:</b> <span>these reviews are from private trips we’ve run through Moroccan Ventures, our private tour company in Morocco, not from this new group tour, which starts in September 2027.</span></p>
+    </div>
+    <div class="rv-grid"><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">Best decision ever for our honeymoon is that we have chosen Moroccan venture!!!</blockquote><figcaption><b translate="no">Claudia T</b><span>Couple · Hong Kong</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">In short, my husband and I had a perfect trip!</blockquote><figcaption><b translate="no">Chua ST</b><span>Couple · Hong Kong</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">I highly recommend Moroccan Ventures as they will certainly make you enjoy Morocco at its best!</blockquote><figcaption><b translate="no">florengf</b><span>Couple · Mexico City</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">I would highly recommend this company, especially for a “Real” Moroccan experience.</blockquote><figcaption><b translate="no">papillon2020</b><span>Solo traveller · Brisbane</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">Overall experience is unforgettable.</blockquote><figcaption><b translate="no">Eunice</b><span>Friends · San Francisco</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure></div>
+    <p class="rv-more"><a href="https://www.tripadvisor.com/Attraction_Review-g293734-d13007686-Reviews-Moroccan_Ventures-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener">Read all Moroccan Ventures reviews on Tripadvisor →</a></p>
   </div>
 </section>
 
@@ -1520,6 +1547,18 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
     </div>
   </li></ol>
     <button type="button" class="btn ghost expand" id="expandAll" style="color:var(--teal)">Expand all days</button>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">From our private tours</span>
+      <h2>What travellers say about Moroccan Ventures</h2>
+      <p class="rv-note"><b>Please note:</b> <span>these reviews are from private trips we’ve run through Moroccan Ventures, our private tour company in Morocco, not from this new group tour, which starts in September 2027.</span></p>
+    </div>
+    <div class="rv-grid"><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">Best decision ever for our honeymoon is that we have chosen Moroccan venture!!!</blockquote><figcaption><b translate="no">Claudia T</b><span>Couple · Hong Kong</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">In short, my husband and I had a perfect trip!</blockquote><figcaption><b translate="no">Chua ST</b><span>Couple · Hong Kong</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">I highly recommend Moroccan Ventures as they will certainly make you enjoy Morocco at its best!</blockquote><figcaption><b translate="no">florengf</b><span>Couple · Mexico City</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">I would highly recommend this company, especially for a “Real” Moroccan experience.</blockquote><figcaption><b translate="no">papillon2020</b><span>Solo traveller · Brisbane</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure><figure class="rv"><div class="rv-q" aria-hidden="true">“</div><blockquote translate="no">Overall experience is unforgettable.</blockquote><figcaption><b translate="no">Eunice</b><span>Friends · San Francisco</span><span class="rv-src">Tripadvisor · private tour</span></figcaption></figure></div>
+    <p class="rv-more"><a href="https://www.tripadvisor.com/Attraction_Review-g293734-d13007686-Reviews-Moroccan_Ventures-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener">Read all Moroccan Ventures reviews on Tripadvisor →</a></p>
   </div>
 </section>
 
