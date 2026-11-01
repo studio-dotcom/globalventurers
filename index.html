@@ -233,7 +233,8 @@ footer .logo-svg{height:36px}
 
 /* stays */
 .stays{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px)}
-@media (max-width:860px){.stays{grid-template-columns:1fr}}
+.stays.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:860px){.stays,.stays.two{grid-template-columns:1fr}}
 .stays figure{margin:0;display:grid;gap:14px;align-content:start}
 .stays .ph{aspect-ratio:4/3;border-radius:4px;overflow:hidden;max-width:100%}
 .stays p{color:var(--muted);font-size:.98rem}
@@ -1368,6 +1369,22 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
   </div>
 </section>
 
+<section id="deserts">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">Morocco desert tour</span>
+      <h2>Two Saharas on one Morocco tour</h2>
+      <p class="lead">Most tours of Morocco squeeze in one night at one desert. This is a true Morocco desert tour: three nights across both of Morocco’s great seas of dunes, with expert local guides and Bijan leading the way.</p>
+    </div>
+    <div class="stays two">
+      <figure><div class="ph"><img src="/img/dunesoft.webp" srcset="/img/dunesoft-800.webp 800w, /img/dunesoft.webp 1454w" sizes="(max-width:700px) 100vw, 60vw" alt="The remote dunes of Erg Chegaga in the Moroccan Sahara" loading="lazy" decoding="async"></div><h3>Erg Chegaga · 2 nights</h3><p>Morocco’s largest and wildest dunes, beyond the end of the road at M’Hamid and reached only by 4x4. Two nights in a premium camp, with sunrise from the high dunes, music around the fire and a sky full of stars.</p></figure>
+      <figure><div class="ph"><img src="/img/camel.webp" srcset="/img/camel-800.webp 800w, /img/camel.webp 1218w" sizes="(max-width:700px) 100vw, 60vw" alt="Camels on the golden dunes of Erg Chebbi near Merzouga" loading="lazy" decoding="async"></div><h3>Erg Chebbi, Merzouga · 1 night</h3><p>The tallest, most golden dunes in Morocco, rising up to around 150 metres. We cross quiet desert roads to arrive for sunset over a completely different sea of sand, in a camp with en-suite tents.</p></figure>
+    </div>
+    <p class="lead" style="margin-top:28px">This is a guided Morocco tour in the best sense: local guides in Marrakech and Fes, an expert desert team in the Sahara, private air-conditioned vehicles and a small group of eight, so the desert feels peaceful rather than crowded.</p>
+    <p style="margin-top:18px"><a class="btn ghost" style="color:var(--teal)" href="/travel-guide/sahara-desert-morocco-guide/">Read our Sahara guide</a></p>
+  </div>
+</section>
+
 <section class="gallery-sec">
   <div class="wrap">
     <div class="head">
@@ -1676,6 +1693,7 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
       <details><summary>How do I book?</summary><p>Tap Book your place, add your details and pay a 30% deposit securely with Stripe to confirm your place. Stripe is one of the world’s most trusted payment platforms: your card details are encrypted and never shared with us. If you prefer, you can request a payment link by email instead. The deposit is refundable within 14 days of booking, and the balance is due 60 days before departure, or you can pay in full when you book.</p></details>
       <details><summary>I'm travelling solo. Do I have to share?</summary><p>No. Choose a private room for a single supplement, or ask to share with another solo guest of the same gender.</p></details>
       <details><summary>Who is this journey for?</summary><p>Travellers who appreciate comfort, beautiful places to stay and a relaxed pace, mostly aged 30 to 65. You’ll need a reasonable level of fitness for medina walks, and there are a few longer scenic drives with comfortable stops along the way.</p></details>
+      <details><summary>How many nights do we spend in the Sahara desert?</summary><p>Three. Two nights in a premium camp in the remote dunes of Erg Chegaga, reached by 4x4 from M’Hamid, and one night at Erg Chebbi near Merzouga, home to Morocco’s tallest dunes. It’s one of the few Morocco tours to visit both deserts.</p></details>
       <details><summary>Are flights included?</summary><p>No, so you can fly from wherever suits you. The journey starts and ends in Marrakech, so a simple return flight works: arrive on 12 September and fly home on 23 September. Airport transfers on those dates are included.</p></details>
       <details><summary>What if the group doesn't fill?</summary><p>The journey runs with a minimum of six guests. If we ever have to cancel, we’ll tell you at least 60 days before departure and refund everything you've paid.</p></details>
       <details><summary>Can I add nights before or after?</summary><p>Yes. We can arrange extra nights in Marrakech before or after the journey, or a short extension to Essaouira.</p></details>
@@ -2404,7 +2422,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
 /* ---------- Pages: home (/) and the Morocco journey (/morocco/) ---------- */
 (function(){
   const home = document.getElementById("home"), tour = document.getElementById("tourView"), legal = document.getElementById("legalView");
-  const TITLES = { home:"Group Tours to Morocco, Max 8 Guests | Global Venturers", tour:"Morocco Group Tour, 12 Days · Boutique Riads & Sahara" };
+  const TITLES = { home:"Group Tours to Morocco, Max 8 Guests | Global Venturers", tour:"Morocco Group Tour, 12 Days · Two Sahara Deserts & Riads" };
   const norm = p => { p = p.replace(/index\.html$/,""); if(/\/morocco$/.test(p)) p += "/"; return /\/morocco\/$/.test(p) ? "/morocco/" : "/"; };
   const isFile = location.protocol === "file:";
   const pageOf = () => isFile ? (window.GV_PAGE || "/") : norm(location.pathname);
