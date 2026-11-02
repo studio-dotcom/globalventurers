@@ -693,6 +693,24 @@ html[lang="zh"] h2[data-h1]{font-family:"Recife Display","Songti SC","Noto Serif
 .ft-lang select:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .ft-lang option{color:#111}
 @media (max-width:600px){.ft-bl{gap:12px 18px}.ft-lang{flex-basis:100%;justify-content:flex-start;width:max-content;max-width:100%}}
+/* home: travel guide cards */
+.gh-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 32px;margin-bottom:clamp(32px,4vw,48px);flex-wrap:wrap}
+.gh-all{color:var(--ink)}
+.gh-all:hover{background:var(--sand)}
+.gh-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2vw,24px)}
+.gd-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s}
+.gd-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
+.gd-card:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.gd-img{aspect-ratio:4/3;overflow:hidden;background:var(--sand)}
+.gd-img img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.gd-card:hover .gd-img img{transform:scale(1.04)}
+.gd-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.gd-body h3{font-size:1.2rem;line-height:1.25}
+.gd-body p{font-size:.92rem;line-height:1.6;color:var(--muted)}
+.gd-meta{font-size:.8rem;color:var(--muted);margin-top:auto;padding-top:6px}
+@media (max-width:1000px){.gh-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gh-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;gap:14px;margin-inline:-20px;padding:0 20px 8px;scrollbar-width:none}.gh-grid::-webkit-scrollbar{display:none}.gd-card{flex:0 0 80%;scroll-snap-align:start}}
+@media (prefers-reduced-motion:reduce){.gd-card,.gd-img img{transition:none}.gd-card:hover{transform:none}.gd-card:hover .gd-img img{transform:none}}
 /* cookie consent */
 .ck{position:fixed;left:16px;right:16px;bottom:16px;z-index:90;display:flex;justify-content:center;pointer-events:none}
 .ck[hidden]{display:none}
@@ -1229,6 +1247,37 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
 </section>
 
 
+
+<section id="guides-home" aria-labelledby="guidesHomeTitle">
+  <div class="wrap">
+    <div class="gh-top">
+      <div class="head" style="margin:0">
+        <span class="label">From our travel guide</span>
+        <h2 id="guidesHomeTitle">Plan your Morocco trip</h2>
+        <p class="lead">Honest, practical guides from the people who run our tours: where to stay, when to go and which desert to choose.</p>
+      </div>
+      <a class="btn ghost gh-all" href="/travel-guide/">See all guides</a>
+    </div>
+    <div class="gh-grid">
+      <a class="gd-card" href="/travel-guide/riads-in-morocco/">
+        <div class="gd-img"><img src="/img/riad.webp" alt="The courtyard of a traditional Moroccan riad with tiles and plants" loading="lazy" decoding="async"></div>
+        <div class="gd-body"><span class="label">Where to stay</span><h3>What Is a Riad? How to Choose One in Morocco</h3><p>Courtyards, rooftops, steep stairs and no room keys. What a riad actually is, and how to pick one you’ll love.</p><span class="gd-meta">5 min read</span></div>
+      </a>
+      <a class="gd-card" href="/travel-guide/best-time-to-visit-morocco/">
+        <div class="gd-img"><img src="/img/chefwhite-800.webp" srcset="/img/chefwhite-800.webp 800w, /img/chefwhite.webp 1200w" sizes="(max-width:560px) 80vw, (max-width:1000px) 50vw, 290px" alt="A woman in white walking through the blue lanes of Chefchaouen, Morocco" loading="lazy" decoding="async"></div>
+        <div class="gd-body"><span class="label">Planning</span><h3>Best Time to Visit Morocco, Month by Month</h3><p>When the desert is perfect, when Marrakech melts, and why September is our favourite month.</p><span class="gd-meta">7 min read</span></div>
+      </a>
+      <a class="gd-card" href="/travel-guide/sahara-desert-morocco-guide/">
+        <div class="gd-img"><img src="/img/herodune-800.webp" srcset="/img/herodune-800.webp 800w, /img/herodune.webp 2000w" sizes="(max-width:560px) 80vw, (max-width:1000px) 50vw, 290px" alt="Rolling dunes of Erg Chegaga in the Moroccan Sahara" loading="lazy" decoding="async"></div>
+        <div class="gd-body"><span class="label">Destinations</span><h3>Erg Chegaga vs Merzouga: Which Sahara Desert?</h3><p>Two seas of sand, two very different experiences. Which to choose, how long to stay and how to pick a good camp.</p><span class="gd-meta">6 min read</span></div>
+      </a>
+      <a class="gd-card" href="/travel-guide/small-group-tours-morocco/">
+        <div class="gd-img"><img src="/img/campdinner-800.webp" srcset="/img/campdinner-800.webp 800w, /img/campdinner.webp 1100w" sizes="(max-width:560px) 80vw, (max-width:1000px) 50vw, 290px" alt="A small group sharing dinner at a desert camp in the Sahara" loading="lazy" decoding="async"></div>
+        <div class="gd-body"><span class="label">Group tours</span><h3>Small Group Tours of Morocco: Why 8 Beats 48</h3><p>Group size changes everything: the hotels, the roads you can take and whether you end up friends or strangers on a coach.</p><span class="gd-meta">6 min read</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <section class="sand" id="faq-home">
   <div class="wrap faq-grid">
@@ -2666,6 +2715,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
     var el=e.target.closest('.acc-btn,a,button,summary,[data-theme-tg],.lang-menu li,.bk-steps li'); if(!el) return;
     var h=el.getAttribute('href')||'', loc=where(el), label=txt(el);
     if(/calendly\.com/i.test(h)) return T('call_booking_click',{location:loc});
+    if(el.closest('.gd-card')) return T('home_guide_click',{link_url:h});
     if(/wa\.me|whatsapp/i.test(h)) return T('whatsapp_click',{location:el.id==='waBtn'?'floating_button':loc,link_text:label});
     if(/^mailto:/i.test(h)) return T('email_click',{location:loc});
     if(/^tel:/i.test(h)) return T('phone_click',{location:loc});
