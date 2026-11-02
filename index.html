@@ -1053,6 +1053,9 @@ html[data-theme="dark"] .mp-note i,html[data-theme="dark"] .mp-dot{fill:#1A1D1B;
 html[data-theme="dark"] .nav .logo{color:var(--ink)}
 html[data-theme="dark"] #siteNav .logo,html[data-theme="dark"] .site-foot .logo{color:#F4EFE8}
 html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
+
+.m-only{display:none!important}
+@media (max-width:700px){.d-only{display:none!important}span.m-only{display:inline!important}p.m-only{display:block!important}#journey .intro .text>p,#journey .intro-photos,.gems-note,.cmp{display:none!important}.mbar .btn{white-space:nowrap;flex:none;padding-left:22px;padding-right:22px}}
 </style>
 
 <!-- GV cookie banner + badge styles -->
@@ -1372,7 +1375,8 @@ html[data-theme="dark"] .gv-ck .gv-yes{background:#0A7880;border-color:#0A7880}
     <div class="hero-copy">
       <span class="new-pill"><span class="dot" aria-hidden="true"></span>Brand new · Our very first group tour</span>
       <h2 data-h1><span class="hero-eyebrow">Morocco group tour · 12 days · September 2027 </span><span class="h1-main">Twelve days. Eight travellers.<br>One Morocco you’ll never forget.</span></h2>
-      <p>A 12-day small group tour of Morocco for up to 8 travellers, 12–23 September 2027, from £3,200 per person. Boutique riads, three nights in the Sahara and the quieter places most tours miss, led by founder Bijan Paul.</p>
+      <p class="d-only">A 12-day small group tour of Morocco for up to 8 travellers, 12–23 September 2027, from £3,200 per person. Boutique riads, three nights in the Sahara and the quieter places most tours miss, led by founder Bijan Paul.</p>
+      <p class="m-only">Max 8 travellers, three nights in the Sahara, from £3,200.</p>
       <div class="actions">
         <a class="btn" href="/morocco/#book" data-book>Book your place</a>
         <a class="btn ghost" href="/morocco/#book">Send an enquiry</a>
@@ -1428,8 +1432,9 @@ html[data-theme="dark"] .gv-ck .gv-yes{background:#0A7880;border-color:#0A7880}
   <div class="wrap gems-grid">
     <div class="gems-head">
       <span class="label">Off the beaten track</span>
-      <h2>Morocco’s real hidden gems, away from the tourist crowds</h2>
-      <p class="lead">This is a completely different kind of tour to the big group tours you may have been on. Most Morocco tours follow the same busy circuit, with coach-loads of visitors at every stop. We built ours around the quieter places we love: wild dunes, oasis towns, hidden beaches and medinas where everyday life carries on as it always has.</p>
+      <h2><span class="d-only">Morocco’s real hidden gems, away from the tourist crowds</span><span class="m-only">Morocco’s real hidden gems</span></h2>
+      <p class="lead d-only">This is a completely different kind of tour to the big group tours you may have been on. Most Morocco tours follow the same busy circuit, with coach-loads of visitors at every stop. We built ours around the quieter places we love: wild dunes, oasis towns, hidden beaches and medinas where everyday life carries on as it always has.</p>
+      <p class="lead m-only">The quiet places most tours miss: wild dunes, oasis towns and hidden beaches.</p>
       <p class="gems-note">We still visit Marrakech, Fes and Chefchaouen, but we go early, with local guides who know the quieter corners away from the busiest streets.</p>
       <ul class="gems-perks">
         <li>Boutique hotels and riads with real character</li>
