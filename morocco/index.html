@@ -20,7 +20,7 @@
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <link rel="canonical" href="https://globalventurers.com/morocco/">
 <meta name="theme-color" content="#161817">
-<script>window.GV_PAGE="/morocco/";(function(){var t=null;try{t=localStorage.getItem('gvTheme')}catch(e){}if(!t){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){t='light'}}document.documentElement.setAttribute('data-theme',t)})();</script>
+<script>window.GV_PAGE="/morocco/";(function(){var t=null;try{t=localStorage.getItem('gvTheme')}catch(e){}if(t!=='dark'){t='light'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="preload" as="image" href="/img/bluedune-wide.webp" media="(min-width:701px)" fetchpriority="high">
 <link rel="preload" as="image" href="/img/bluedune-m.webp" media="(max-width:700px)" fetchpriority="high">
 <link rel="preload" href="/fonts/f-36b347c9ee.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/albert-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -2777,7 +2777,6 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
 function sync(){var d=root.getAttribute('data-theme')==='dark';document.querySelectorAll('[data-theme-tg]').forEach(function(b){b.setAttribute('aria-pressed',d?'true':'false')});}
 function set(t,save){root.classList.add('theme-anim');root.setAttribute('data-theme',t);if(save){try{localStorage.setItem(KEY,t)}catch(e){}}sync();setTimeout(function(){root.classList.remove('theme-anim')},500);}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-theme-tg]');if(!b)return;set(root.getAttribute('data-theme')==='dark'?'light':'dark',true)});
-try{var mq=matchMedia('(prefers-color-scheme: dark)');mq.addEventListener('change',function(e){var s=null;try{s=localStorage.getItem(KEY)}catch(x){}if(!s)set(e.matches?'dark':'light',false)})}catch(e){}
 sync();})();
 </script>
 
