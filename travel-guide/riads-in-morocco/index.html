@@ -189,7 +189,7 @@ html[data-theme="dark"] .btn{background:#0A7880;border-color:#0A7880}
 <div class="tb"><div class="wrap">
  <a href="https://wa.me/447935187068?text=Hi%2C%20I%27d%20love%20to%20know%20more%20about%20your%20journeys" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.7L3 29l6.9-2.1c1.9 1 4 1.6 6.1 1.6 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.1c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4.1 1.2 1.2-4-.3-.4c-1.1-1.7-1.7-3.6-1.7-5.6C5.3 9.8 10.1 5.1 16 5.1s10.7 4.7 10.7 10.5S21.9 26.1 16 26.1z"/></svg><span>WhatsApp us</span></a>
  <a class="hide-s" href="mailto:contact@globalventurers.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>contact@globalventurers.com</a>
- <a class="tb-call" aria-label="Book a 15-minute call" href="https://calendly.com/contact-globalventurers/30min" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span class="tb-call-l">Book a 15-min call</span><span class="tb-call-s">Book a call</span></a>
+ <a class="tb-call" aria-label="Book a free 15-minute call" href="https://calendly.com/contact-globalventurers/30min" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span class="tb-call-l">Book a free 15-min call</span><span class="tb-call-s">Book a free call</span></a>
 </div></div>
 <header class="gnav" id="gnav"><div class="wrap">
  <a class="logo" href="/" aria-label="Global Venturers home"><svg class="logo-svg" viewBox="0 0 378 100" role="img" aria-label="Global Venturers"><use href="#gv-logo"/></svg></a>
@@ -292,7 +292,7 @@ html[data-theme="dark"] .btn{background:#0A7880;border-color:#0A7880}
   <div><svg class="logo-svg" viewBox="0 0 378 100" role="img" aria-label="Global Venturers"><use href="#gv-logo"/></svg>
    <p>Small group tours to Morocco for a maximum of 8 travellers, with boutique riads, private air-conditioned transport and places most tours miss. Founded and led by Bijan Paul.</p>
    <p><a class="btn" href="/morocco/">See the Morocco journey</a></p>
-   <p><a class="ft-call" href="https://calendly.com/contact-globalventurers/30min" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Book a 15-minute call with Bijan</span></a></p>
+   <p><a class="ft-call" href="https://calendly.com/contact-globalventurers/30min" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Book a free 15-min call</span></a></p>
   </div>
   <div><h2>Travel guide</h2><ul><li><a href="/travel-guide/">All Morocco guides</a></li><li><a href="/travel-guide/travelling-to-115-countries/">What Travelling to 115 Countries Taught Me (And Why I Ended Up in Morocco)</a></li><li><a href="/travel-guide/planning-a-trip-to-morocco/">Planning a Trip to Morocco</a></li><li><a href="/travel-guide/best-time-to-visit-morocco/">Best Time to Visit Morocco</a></li><li><a href="/travel-guide/small-group-tours-morocco/">Small Group Tours of Morocco</a></li><li><a href="/travel-guide/morocco-itinerary-12-days/">12 Days in Morocco</a></li><li><a href="/travel-guide/sahara-desert-morocco-guide/">The Sahara in Morocco</a></li></ul></div>
   <div><h2>Contact</h2><ul>
@@ -362,6 +362,19 @@ document.addEventListener('gv:consent',function(e){hide();upd(e.detail)});
 b.querySelector('[data-ck="yes"]').onclick=function(){done('accepted')};
 b.querySelector('[data-ck="no"]').onclick=function(){done('declined')};
 if(!v)b.hidden=false;})();
+</script>
+<script>
+/* Calendly: open the 15-minute call as a pop-up dialog. Calendly's files load only when someone clicks, so pages stay fast. */
+(function(){var st=0,q=[];
+function load(cb){if(window.Calendly&&Calendly.initPopupWidget)return cb();q.push(cb);if(st)return;st=1;
+var l=document.createElement('link');l.rel='stylesheet';l.href='https://assets.calendly.com/assets/external/widget.css';document.head.appendChild(l);
+var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;
+s.onload=function(){var f;while(f=q.shift())f()};s.onerror=function(){st=2;q.length=0};document.head.appendChild(s);}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="calendly.com/contact-globalventurers"]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;
+if(st===2)return;e.preventDefault();var url=a.href.split('?')[0]+'?hide_gdpr_banner=1&primary_color=07747d',opened=false;
+var t=setTimeout(function(){if(!opened)window.open(a.href,'_blank','noopener')},5000);
+load(function(){opened=true;clearTimeout(t);Calendly.initPopupWidget({url:url});});});
+})();
 </script>
 </body>
 </html>
