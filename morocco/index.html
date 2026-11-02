@@ -1040,25 +1040,8 @@ html[data-theme="dark"] ::selection{background:#0A7880;color:#fff}
 @media (max-width:700px){.d-only{display:none!important}span.m-only{display:inline!important}p.m-only{display:block!important}#journey .intro .text>p,#journey .intro-photos,.gems-note,.cmp{display:none!important}.mbar .btn{white-space:nowrap;flex:none;padding-left:22px;padding-right:22px}}
 </style>
 
-<!-- GV cookie banner + badge styles -->
+<!-- GV top-bar call + badge styles -->
 <style>
-.gv-ck{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--sand,#F3EEE7);color:var(--ink,#1D2321);border-bottom:1px solid var(--line,#E4DED6);box-shadow:0 8px 24px -16px rgba(0,0,0,.35);padding-top:env(safe-area-inset-top,0px);font:400 .84rem/1.5 var(--f-body,"Albert Sans",Arial,sans-serif);animation:gvck .4s cubic-bezier(.2,.8,.2,1)}
-@keyframes gvck{from{transform:translateY(-100%)}to{transform:none}}
-.gv-ck[hidden]{display:none}
-.gv-ck-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
-.gv-ck svg{width:20px;height:20px;flex:none;color:var(--teal,#07747D)}
-.gv-ck p{margin:0;flex:1;color:var(--ink,#1D2321)}
-.gv-ck a{color:var(--teal,#07747D);text-decoration:underline;text-underline-offset:3px}
-.gv-ck a:hover{color:var(--teal-ink,#06646C)}
-.gv-ck-b{display:flex;gap:8px;flex:none}
-.gv-ck button{font:500 .7rem/1 var(--f-body,"Albert Sans",Arial,sans-serif);letter-spacing:.14em;text-transform:uppercase;padding:0 1.3em;min-height:36px;border-radius:3px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
-.gv-ck .gv-yes{background:var(--teal,#07747D);border:1px solid var(--teal,#07747D);color:#fff}
-.gv-ck .gv-yes:hover{background:var(--teal-ink,#06646C);border-color:var(--teal-ink,#06646C)}
-html[data-theme="dark"] .gv-ck .gv-yes{background:#0A7880;border-color:#0A7880}
-.gv-ck .gv-no{background:transparent;border:1px solid currentColor;color:var(--ink,#1D2321)}
-.gv-ck .gv-no:hover{background:rgba(127,127,127,.12)}
-.gv-ck button:focus-visible,.gv-ck a:focus-visible{outline:2px solid var(--teal,#07747D);outline-offset:2px}
-@media (max-width:640px){.gv-ck-in{flex-wrap:wrap;gap:10px;padding:12px 16px}.gv-ck p{flex:1 1 calc(100% - 34px);font-size:.8rem}.gv-ck-b{width:100%}.gv-ck-b button{flex:1}}
 .tb-call{display:inline-flex;align-items:center;gap:7px;color:#EDE8E1;text-decoration:none;border:1px solid rgba(237,232,225,.35);border-radius:999px;padding:5px 13px;white-space:nowrap;flex:none;font-weight:500;transition:background .2s,border-color .2s}
 .tb-call:hover{background:rgba(255,255,255,.08);border-color:#EDE8E1}
 .tb-call:focus-visible{outline:2px solid #fff;outline-offset:2px}
@@ -2785,21 +2768,6 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-them
 sync();})();
 </script>
 
-<div class="gv-ck" id="gvCk" role="region" aria-label="Cookie consent" hidden><div class="gv-ck-in">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M20.9 12.6A9 9 0 1 1 11.4 3.1a3 3 0 0 0 3.8 3.8 3 3 0 0 0 3.8 3.8 3 3 0 0 0 1.9 1.9z"/><circle cx="8.5" cy="10.5" r=".6" fill="currentColor"/><circle cx="12" cy="15.5" r=".6" fill="currentColor"/><circle cx="7.5" cy="15" r=".6" fill="currentColor"/><circle cx="15.5" cy="12.5" r=".6" fill="currentColor"/></svg>
-  <p><span>This site uses cookies. For more information on how we use them, please review our</span> <a href="#privacy">privacy policy</a>.</p>
-  <div class="gv-ck-b"><button type="button" class="gv-no" data-ck="no">Decline</button><button type="button" class="gv-yes" data-ck="yes">Accept</button></div>
-</div></div>
-<script>
-(function(){var K='gvConsent',b=document.getElementById('gvCk');if(!b)return;var v=null;try{v=localStorage.getItem(K)}catch(e){}
-function upd(x){if(typeof gtag==='function')gtag('consent','update',{analytics_storage:x==='accepted'?'granted':'denied'})}
-function hide(){b.hidden=true}
-function done(x){try{localStorage.setItem(K,x)}catch(e){}window.gvConsent=x;hide();try{document.dispatchEvent(new CustomEvent('gv:consent',{detail:x}))}catch(e){upd(x)}}
-document.addEventListener('gv:consent',function(e){hide();upd(e.detail)});
-b.querySelector('[data-ck="yes"]').onclick=function(){done('accepted')};
-b.querySelector('[data-ck="no"]').onclick=function(){done('declined')};
-if(!v)b.hidden=false;})();
-</script>
 <script>
 /* Calendly: open the 15-minute call as a pop-up dialog. Calendly's files load only when someone clicks, so pages stay fast. */
 (function(){var st=0,q=[];
