@@ -2007,7 +2007,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
     const id = hashId(), el = id && document.getElementById(id);
     /* Pages now live at their own URLs: send old #links to the right page */
     if(!isFile && id && !el){
-      const map = {terms:"/terms/", privacy:"/privacy/", why:"/", journeys:"/", departures:"/morocco/", "faq-home":"/", bejan:"/about/", "why-us":"/about/", itinerary:"/morocco/", book:"/morocco/", enquire:"/morocco/", faq:"/morocco/", journey:"/morocco/", deserts:"/morocco/", "hidden-gems":"/morocco/", morocco:"/morocco/", top:"/morocco/"};
+      const map = {terms:"/terms/", privacy:"/privacy/", why:"/", journeys:"/", departures:"/morocco/", "faq-home":"/", bejan:"/about/", "why-us":"/", itinerary:"/morocco/", book:"/morocco/", enquire:"/morocco/", faq:"/morocco/", journey:"/morocco/", deserts:"/morocco/", "hidden-gems":"/morocco/", morocco:"/morocco/", top:"/morocco/"};
       let dest = map[id] || (/^pp-/.test(id) ? "/privacy/" : /^(tc-|t-)/.test(id) ? "/terms/" : null);
       if(dest && dest!==pageOf()){ location.replace(dest + ((id==="terms"||id==="privacy"||id==="morocco"||id==="top"||id==="departures") ? "" : "#"+id)); return; }
     }

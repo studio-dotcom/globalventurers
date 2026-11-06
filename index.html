@@ -1174,6 +1174,25 @@ html.vt-arrive .vt-curtain{clip-path:inset(0 0 0 0);transition:none}html.vt-arri
   </div>
 </section>
 
+<section class="whyus" id="why-us" aria-labelledby="whyUsTitle">
+  <div class="wrap whyus-grid">
+    <div class="whyus-head">
+      <span class="label">Why Global Venturers</span>
+      <h2 id="whyUsTitle">Why travel with Global Venturers</h2>
+      <p class="lead">Five reasons travellers choose a founder-led journey with Global Venturers.</p>
+      <a class="btn" href="/morocco/">Join the Morocco journey</a>
+    </div>
+    <ol class="whyus-list">
+      <li><span class="n" aria-hidden="true">01</span><div><h3>Led by a seasoned explorer</h3><p>Our founder Bijan Paul has explored 115 countries. That depth of travel experience shapes every route, every stop and every recommendation.</p></div></li>
+      <li><span class="n" aria-hidden="true">02</span><div><h3>200+ private tours</h3><p>More than a decade organising and running private tours in Morocco, with over 200 tours delivered. You’re in experienced hands from first enquiry to final farewell.</p></div></li>
+      <li><span class="n" aria-hidden="true">03</span><div><h3>Places most tours never reach</h3><p>We build our journeys around the hidden valleys, quiet villages and remote landscapes that the vast majority of tour companies simply skip.</p></div></li>
+      <li><span class="n" aria-hidden="true">04</span><div><h3>Memories, beautifully captured</h3><p>Bijan is a photographer and filmmaker. We capture the journey in photos and film along the way, with golden-hour stops and tips for your own shots, so you come home with beautiful memories.</p></div></li>
+      <li><span class="n" aria-hidden="true">05</span><div><h3>Comfort without compromise</h3><p>Our tours are made for travellers who value quality, not backpacker budgets: well-run hotels and riads with proper standards, comfortable private transport and great places to eat, recommended by people who know them.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+
 <section class="sand" id="journeys">
   <div class="wrap">
     <div class="head">
@@ -1721,7 +1740,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
     const id = hashId(), el = id && document.getElementById(id);
     /* Pages now live at their own URLs: send old #links to the right page */
     if(!isFile && id && !el){
-      const map = {terms:"/terms/", privacy:"/privacy/", why:"/", journeys:"/", departures:"/morocco/", "faq-home":"/", bejan:"/about/", "why-us":"/about/", itinerary:"/morocco/", book:"/morocco/", enquire:"/morocco/", faq:"/morocco/", journey:"/morocco/", deserts:"/morocco/", "hidden-gems":"/morocco/", morocco:"/morocco/", top:"/morocco/"};
+      const map = {terms:"/terms/", privacy:"/privacy/", why:"/", journeys:"/", departures:"/morocco/", "faq-home":"/", bejan:"/about/", "why-us":"/", itinerary:"/morocco/", book:"/morocco/", enquire:"/morocco/", faq:"/morocco/", journey:"/morocco/", deserts:"/morocco/", "hidden-gems":"/morocco/", morocco:"/morocco/", top:"/morocco/"};
       let dest = map[id] || (/^pp-/.test(id) ? "/privacy/" : /^(tc-|t-)/.test(id) ? "/terms/" : null);
       if(dest && dest!==pageOf()){ location.replace(dest + ((id==="terms"||id==="privacy"||id==="morocco"||id==="top"||id==="departures") ? "" : "#"+id)); return; }
     }
