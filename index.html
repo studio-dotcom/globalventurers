@@ -9,7 +9,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   var gvC=null;try{gvC=localStorage.getItem('gvConsent')}catch(e){}
-  gtag('consent','default',{analytics_storage:gvC==='accepted'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+  gtag('consent','default',{analytics_storage:gvC==='declined'?'denied':'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
   gtag('js', new Date());
 
   gtag('config', 'G-W7CK6L0NY0');
@@ -2144,7 +2144,7 @@ body.on-about .mbar{display:none!important}
     <li><b>Performing our contract with you:</b> to take and manage your booking, arrange accommodation, transport and guides, take payments and look after you during your journey.</li>
     <li><b>Legal obligations:</b> to keep financial records, meet tax rules and respond to lawful requests from authorities.</li>
     <li><b>Legitimate interests:</b> to answer enquiries, improve our journeys and website, keep our business secure and send you important information about a journey you have booked.</li>
-    <li><b>Consent:</b> to send you marketing emails, use analytics cookies, use health information, and feature identifiable photos of you in our marketing. You can withdraw your consent at any time.</li>
+    <li><b>Consent:</b> to send you marketing emails, use health information, and feature identifiable photos of you in our marketing. You can withdraw your consent at any time.</li>
   </ul>
 
   <h2 id="pp-how">5. How we collect your information</h2>
@@ -2204,7 +2204,7 @@ body.on-about .mbar{display:none!important}
   <p>Our website may link to other websites and services, such as WhatsApp, Instagram, Facebook or our payment provider. They have their own privacy policies, and we are not responsible for how they use your information.</p>
 
   <h2 id="pp-cookies">14. Cookies</h2>
-  <p>We use essential cookies to make our website work, for example to remember your language and your cookie choice. With your consent, we may also use analytics cookies to understand how visitors use the site. You can accept or decline these at any time using <button type="button" class="ck-open lg-inline">Cookie settings</button>.</p>
+  <p>We use essential cookies to make our website work, for example to remember your language and your cookie choice. We also use Google Analytics cookies, which are statistical cookies only, to understand how visitors use the site so we can improve it. We don’t use cookies for advertising. As UK law allows for this kind of analytics, they are on by default, and you can switch them off at any time using <button type="button" class="ck-open lg-inline">Cookie settings</button>.</p>
 
   <h2 id="pp-contact">15. Contact us and complaints</h2>
   <p>If you have any questions about this policy or how we use your information, please contact us:</p>
@@ -2831,7 +2831,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
   var GA_ID="G-W7CK6L0NY0";
   function on(){ return window.gvConsent!=='declined' && typeof window.gtag==='function'; }
   window.gvTrack=function(name,params){ if(!on()) return; try{ gtag('event',name,Object.assign({page_path:location.pathname+location.hash},params||{})); }catch(e){} };
-  document.addEventListener('gv:consent',function(e){ window['ga-disable-'+GA_ID]=(e.detail==='declined'); });
+  document.addEventListener('gv:consent',function(e){ window['ga-disable-'+GA_ID]=(e.detail==='declined'); if(typeof gtag==='function')gtag('consent','update',{analytics_storage:e.detail==='declined'?'denied':'granted'}); });
   var T=window.gvTrack, txt=function(el){ return (el.getAttribute('aria-label')||el.textContent||'').replace(/\s+/g,' ').trim().slice(0,90); };
   function where(el){ if(el.closest('.topbar,.tb,#topbar'))return 'top_bar'; if(el.closest('header,.nav'))return 'menu'; if(el.closest('footer,.site-foot'))return 'footer'; if(el.closest('#bk,.bk'))return 'booking_form'; if(el.closest('.hero'))return 'hero'; var s=el.closest('section[id]'); return s?s.id:'page'; }
 

@@ -9,7 +9,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   var gvC=null;try{gvC=localStorage.getItem('gvConsent')}catch(e){}
-  gtag('consent','default',{analytics_storage:gvC==='accepted'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+  gtag('consent','default',{analytics_storage:gvC==='declined'?'denied':'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
   gtag('js', new Date());
 
   gtag('config', 'G-W7CK6L0NY0');
