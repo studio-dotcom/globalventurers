@@ -66,5 +66,5 @@ Travellers, mostly aged 30 to 65, who value comfort, beautiful places to stay, a
 - [Home](https://globalventurers.com/)
 - [Morocco travel guide](https://globalventurers.com/travel-guide/)
 - [Morocco Signature Journey](https://globalventurers.com/morocco/)
-- [Terms & conditions](https://globalventurers.com/#terms)
-- [Privacy policy](https://globalventurers.com/#privacy)
+- [Terms & conditions](https://globalventurers.com/terms/)
+- [Privacy policy](https://globalventurers.com/privacy/)
