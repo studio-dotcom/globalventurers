@@ -1069,6 +1069,25 @@ body.on-about .mbar{display:none!important}
 .about-cta-b{display:flex;flex-wrap:wrap;gap:12px}
 
 html.vt-arrive .vt-curtain{clip-path:inset(0 0 0 0);transition:none}html.vt-arrive .vt-curtain .vt-mark{opacity:1;transform:none;transition:none}html.vt-arrive .view{visibility:hidden}
+
+.hl{position:relative;margin-top:clamp(28px,4vw,44px)}
+.hl-track{list-style:none;margin:0;padding:0 0 6px;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/3);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hl-track::-webkit-scrollbar{display:none}
+.hl-card{scroll-snap-align:start;display:flex;flex-direction:column;gap:12px}
+.hl-ph{aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:var(--sand)}
+.hl-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.hl-card:hover .hl-ph img{transform:scale(1.04)}
+.hl-day{align-self:flex-start;margin-top:6px;background:#E8CF95;color:#2B2417;border-radius:999px;padding:6px 12px;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.hl-card h3{margin:0;font-family:var(--f-head);font-weight:300;font-size:1.35rem;line-height:1.2}
+.hl-card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.6}
+.hl-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.hl-btn{width:46px;height:46px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,opacity .2s}
+.hl-btn:hover{background:var(--sand)}.hl-btn[disabled]{opacity:.35;cursor:default}
+@media (max-width:900px){.hl-track{grid-auto-columns:calc((100% - 24px)/2)}}
+@media (max-width:600px){.hl-track{grid-auto-columns:82%;gap:16px}.hl-nav{display:none}}
+.facts{background:var(--sand);border:0;border-radius:12px;padding:0 8px;margin-top:clamp(20px,3vw,32px)}
+.facts div{border-color:var(--line)}.facts div:first-child{padding-left:20px}
+@media (max-width:700px){.facts{padding:4px 18px}.facts div:nth-child(odd){padding-left:0}.facts div:first-child{padding-left:0}}
 </style>
 
 <!-- GV top-bar call + badge styles -->
@@ -1176,19 +1195,11 @@ html.vt-arrive .vt-curtain{clip-path:inset(0 0 0 0);transition:none}html.vt-arri
 </section>
 
 <section class="gems-sec" id="hidden-gems">
-  <div class="wrap gems-grid">
-    <div class="gems-head">
+  <div class="wrap"><div class="head">
       <span class="label">Off the beaten track</span>
       <h2>Morocco’s real hidden gems</h2>
       <p class="lead">The quiet places most tours miss: wild dunes, oasis towns and hidden beaches.</p>
-    </div>
-    <ul class="gems">
-      <li><h3>Erg Chegaga</h3><p>Morocco’s wildest dunes, beyond the end of the road at M’Hamid. Reached only by 4x4, they see a fraction of the visitors of the better-known Sahara camps.</p></li>
-      <li><h3>Agdz and the Draa Valley</h3><p>A quiet oasis town of palm groves and old kasbahs, where most tours simply drive straight through.</p></li>
-      <li><h3>Tetouan</h3><p>A UNESCO-listed medina shaped by Andalusian refugees, one of the best preserved and least visited in Morocco.</p></li>
-      <li><h3>Tangier and its hidden beaches</h3><p>Two nights in beautiful Tangier, with time on the quiet beaches of Dalia and Playa Belyounech, facing Spain across the Strait of Gibraltar, where very few travellers ever go.</p></li>
-    </ul>
-  </div>
+    </div><div class="hl" data-hl><ul class="hl-track" aria-label="Trip highlights"><li class="hl-card"><div class="hl-ph"><img src="/img/aitbenhaddou.webp" srcset="/img/aitbenhaddou-800.webp 800w, /img/aitbenhaddou.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="The earthen ksar of Aït Ben Haddou" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 1</span><h3>Aït Ben Haddou</h3><p>Wander the UNESCO-listed earthen ksar on the old caravan route over the High Atlas.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/atlasvalley.webp" srcset="/img/atlasvalley-800.webp 800w, /img/atlasvalley.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="A green valley below the High Atlas" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 1</span><h3>Agdz and the Draa Valley</h3><p>A quiet oasis town of palm groves and old kasbahs that most tours drive straight past.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/dunesoft.webp" srcset="/img/dunesoft-800.webp 800w, /img/dunesoft.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="The dunes of Erg Chegaga" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 2–3</span><h3>Two nights at Erg Chegaga</h3><p>Morocco’s wildest dunes, reached only by 4x4, with sunrise from the high dunes and music by the fire.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/camel.webp" srcset="/img/camel-800.webp 800w, /img/camel.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="Camels on the dunes of Erg Chebbi" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 4</span><h3>Erg Chebbi, Merzouga</h3><p>Sunset over Morocco’s tallest, most golden dunes.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/fesview.webp" srcset="/img/fesview-800.webp 800w, /img/fesview.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="The rooftops of Fes" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 6</span><h3>A full day in Fes</h3><p>The old medina with a historian guide, the Chouara tannery and the doors of Al Quaraouiyine.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/chefchaouen.webp" srcset="/img/chefchaouen-800.webp 800w, /img/chefchaouen.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="A blue lane in Chefchaouen" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 7</span><h3>Chefchaouen, the blue town</h3><p>Blue lanes in the Rif Mountains and sunset from the Spanish Mosque.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/window.webp" srcset="/img/window-800.webp 800w, /img/window.webp 1200w" sizes="(max-width:700px) 82vw, 380px" alt="A carved window in a Moroccan medina" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 8</span><h3>Tetouan’s white medina</h3><p>A UNESCO-listed medina shaped by Andalusian refugees, and one of the least visited in Morocco.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/souk.webp" alt="A souk in northern Morocco" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 10</span><h3>Tangier and its hidden beaches</h3><p>Mint tea at Café Hafa and the quiet beaches of Dalia and Playa Belyounech, facing Spain.</p></li><li class="hl-card"><div class="hl-ph"><img src="/img/casablanca.webp" alt="The Hassan II Mosque in Casablanca" loading="lazy" decoding="async"></div><span class="hl-day">Included on day 11</span><h3>Hassan II Mosque</h3><p>One of the world’s largest mosques, built over the Atlantic, and one you can step inside.</p></li></ul><div class="hl-nav"><button type="button" class="hl-btn" data-hl-prev aria-label="Previous highlights"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="hl-btn" data-hl-next aria-label="Next highlights"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button></div></div></div>
   <div class="wrap cmp">
     <h3 class="cmp-title">Not your usual group tour</h3>
     <p class="cmp-lead">Here’s how this journey compares with the big group tours on Morocco’s busy tourist routes.</p>
@@ -1202,31 +1213,13 @@ html.vt-arrive .vt-curtain{clip-path:inset(0 0 0 0);transition:none}html.vt-arri
     <div class="head">
       <span class="label">Morocco desert tour</span>
       <h2>Two Saharas on one Morocco tour</h2>
-      <p class="lead">Most tours of Morocco squeeze in one night at one desert. This is a true Morocco desert tour: three nights across both of Morocco’s great seas of dunes, with expert local guides and Bijan leading the way.</p>
+      <p class="lead">Three nights across both of Morocco’s great seas of dunes.</p>
     </div>
     <div class="stays two">
-      <figure><div class="ph"><img src="/img/dunesoft.webp" srcset="/img/dunesoft-800.webp 800w, /img/dunesoft.webp 1454w" sizes="(max-width:700px) 100vw, 60vw" alt="The remote dunes of Erg Chegaga in the Moroccan Sahara" loading="lazy" decoding="async"></div><h3>Erg Chegaga · 2 nights</h3><p>Morocco’s largest and wildest dunes, beyond the end of the road at M’Hamid and reached only by 4x4. Two nights in a premium camp, with sunrise from the high dunes, music around the fire and a sky full of stars.</p></figure>
-      <figure><div class="ph"><img src="/img/camel.webp" srcset="/img/camel-800.webp 800w, /img/camel.webp 1218w" sizes="(max-width:700px) 100vw, 60vw" alt="Camels on the golden dunes of Erg Chebbi near Merzouga" loading="lazy" decoding="async"></div><h3>Erg Chebbi, Merzouga · 1 night</h3><p>The tallest, most golden dunes in Morocco, rising up to around 150 metres. We cross quiet desert roads to arrive for sunset over a completely different sea of sand, in a camp with en-suite tents.</p></figure>
+      <figure><div class="ph"><img src="/img/dunesoft.webp" srcset="/img/dunesoft-800.webp 800w, /img/dunesoft.webp 1454w" sizes="(max-width:700px) 100vw, 60vw" alt="The remote dunes of Erg Chegaga in the Moroccan Sahara" loading="lazy" decoding="async"></div><h3>Erg Chegaga · 2 nights</h3><p>Morocco’s wildest dunes, reached only by 4x4, under a sky full of stars.</p></figure>
+      <figure><div class="ph"><img src="/img/camel.webp" srcset="/img/camel-800.webp 800w, /img/camel.webp 1218w" sizes="(max-width:700px) 100vw, 60vw" alt="Camels on the golden dunes of Erg Chebbi near Merzouga" loading="lazy" decoding="async"></div><h3>Erg Chebbi, Merzouga · 1 night</h3><p>The tallest, most golden dunes in Morocco, with sunset over the sand.</p></figure>
     </div>
-    <p class="lead" style="margin-top:28px">This is a guided Morocco tour in the best sense: local guides in Fes and Tangier, an expert desert team in the Sahara, private air-conditioned vehicles and a small group of eight, so the desert feels peaceful rather than crowded.</p>
     <p style="margin-top:18px"><a class="btn ghost" style="color:var(--teal)" href="/travel-guide/sahara-desert-morocco-guide/">Read our Sahara guide</a></p>
-  </div>
-</section>
-
-<section class="gallery-sec">
-  <div class="wrap">
-    <div class="head">
-      <span class="label">Through Bijan’s lens</span>
-      <h2>The Morocco you'll see</h2>
-      <p class="lead">Dunes at first light, blue doorways, spice-scented souks and Atlantic sunsets. Every one of these places is on the journey.</p>
-    </div>
-    <div class="gallery g5">
-      <figure class="g-big"><img src="/img/dunewoman.webp" srcset="/img/dunewoman-800.webp 800w, /img/dunewoman.webp 1218w" sizes="(max-width:700px) 100vw, 60vw" alt="A lone traveller on the crest of a Sahara dune" loading="lazy" decoding="async"><figcaption>Sahara</figcaption></figure>
-      <figure><img src="/img/chefchaouen.webp" srcset="/img/chefchaouen-800.webp 800w, /img/chefchaouen.webp 1200w" sizes="(max-width:700px) 100vw, 60vw" alt="A blue lane in Chefchaouen" loading="lazy" decoding="async"><figcaption>Chefchaouen</figcaption></figure>
-      <figure><img src="/img/koutoubia.webp" alt="Koutoubia Mosque at sunset" loading="lazy" decoding="async"><figcaption>Marrakech</figcaption></figure>
-      <figure><img src="/img/atlasvalley.webp" srcset="/img/atlasvalley-800.webp 800w, /img/atlasvalley.webp 1218w" sizes="(max-width:700px) 100vw, 60vw" alt="Snow-capped High Atlas above a green valley" loading="lazy" decoding="async"><figcaption>High Atlas</figcaption></figure>
-      <figure><img src="/img/fesview.webp" srcset="/img/fesview-800.webp 800w, /img/fesview.webp 1200w" sizes="(max-width:700px) 100vw, 60vw" alt="The rooftops of Fes" loading="lazy" decoding="async"><figcaption>Fes el-Bali</figcaption></figure>
-    </div>
   </div>
 </section>
 
@@ -2349,6 +2342,13 @@ if(st===2)return;e.preventDefault();var url=a.href.split('?')[0]+'?hide_gdpr_ban
 var t=setTimeout(function(){if(!opened)window.open(a.href,'_blank','noopener')},5000);
 load(function(){opened=true;clearTimeout(t);Calendly.initPopupWidget({url:url});});});
 })();
+</script>
+<script>
+(function(){document.querySelectorAll('[data-hl]').forEach(function(w){var t=w.querySelector('.hl-track'),p=w.querySelector('[data-hl-prev]'),n=w.querySelector('[data-hl-next]');
+function step(){var c=t.querySelector('.hl-card');return c?c.getBoundingClientRect().width+24:300}
+function upd(){p.disabled=t.scrollLeft<4;n.disabled=t.scrollLeft+t.clientWidth>=t.scrollWidth-4}
+p.addEventListener('click',function(){t.scrollBy({left:-step(),behavior:'smooth'})});n.addEventListener('click',function(){t.scrollBy({left:step(),behavior:'smooth'})});
+t.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();});})();
 </script>
 <!-- GV scroll fade-in -->
 <style>.gv-fade{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.gv-fade.gv-in{opacity:1;transform:none}@media print{.gv-fade{opacity:1!important;transform:none!important}}</style>
