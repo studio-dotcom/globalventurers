@@ -1134,7 +1134,7 @@ html.vt-arrive .vt-curtain{clip-path:inset(0 0 0 0);transition:none}html.vt-arri
 <div class="bk" id="bk" hidden>
   <div class="bk-panel" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="bkTitle">
     <div class="bk-head">
-      <div><span class="label">Book your place</span><h2 id="bkTitle">Morocco Signature Journey</h2><p class="bk-sub">12 – 23 September 2027 · 12 days</p></div>
+      <div><span class="label">Book your place</span><h2 id="bkTitle">Morocco Signature Journey</h2><p class="bk-sub">12 – 24 September 2027 · 13 days</p></div>
       <button type="button" class="bk-x" id="bkClose" aria-label="Close booking">×</button>
     </div>
     <ol class="bk-steps" aria-label="Booking steps"><li data-s="1">Trip</li><li data-s="2">Travellers</li><li data-s="3">Review</li><li data-s="4">Payment</li></ol>
@@ -1470,7 +1470,7 @@ html.vt-arrive .vt-curtain{clip-path:inset(0 0 0 0);transition:none}html.vt-arri
   </a>
   <button type="button" class="wa-x" id="waClose" aria-label="Hide WhatsApp button">×</button>
 </div>
-<div class="mbar" id="mbar" aria-hidden="true"><p>12 – 23 September 2027<b>From £3,200</b></p><a class="btn" href="/morocco/#book" tabindex="-1" data-book>Book now</a></div>
+<div class="mbar" id="mbar" aria-hidden="true"><p>12 – 24 September 2027<b>From £3,200</b></p><a class="btn" href="/morocco/#book" tabindex="-1" data-book>Book now</a></div>
 
 <script>
 /* Smooth, eased scrolling for in-page links and CTAs */
@@ -1528,7 +1528,7 @@ document.documentElement.lang = "en";
   }
 })();
 /* ---------- Journey details (edit here) ---------- */
-const TRIP = { name:"Morocco Signature Journey", dates:"12 – 23 September 2027", startISO:"2027-09-12", price:3200, single:650, left:8, depositPct:30, balanceDays:60 };
+const TRIP = { name:"Morocco Signature Journey", dates:"12 – 24 September 2027", startISO:"2027-09-12", price:3200, single:650, left:8, depositPct:30, balanceDays:60 };
 const EMAIL = "contact@globalventurers.com";
 /* Form delivery. Paste a Web3Forms access key here (free at web3forms.com, sent to contact@globalventurers.com)
    to use Web3Forms; leave empty to use FormSubmit. */
@@ -1789,7 +1789,7 @@ document.querySelector(".bk-steps").addEventListener("keydown",e=>{ const li=e.t
 /* ---------- Pages: home (/) and the Morocco journey (/morocco/) ---------- */
 (function(){
   const home = document.getElementById("home"), tour = document.getElementById("tourView"), legal = document.getElementById("legalView"), about = document.getElementById("aboutView");
-  const TITLES = { home:"Group Tours to Morocco, Max 8 Guests | Global Venturers", tour:"Morocco Group Tour, 12 Days · Two Sahara Deserts & Riads", about:"About Global Venturers · Founder-Led Small Group Tours" };
+  const TITLES = { home:"Group Tours to Morocco, Max 8 Guests | Global Venturers", tour:"Morocco Group Tour, 13 Days · Two Sahara Deserts & Riads", about:"About Global Venturers · Founder-Led Small Group Tours" };
   const norm = p => { p = p.replace(/index\.html$/,""); if(/\/(morocco|about|terms|privacy)$/.test(p)) p += "/"; const m = p.match(/\/(morocco|about|terms|privacy)\/$/); return m ? "/"+m[1]+"/" : "/"; };
   const VIEWEL = {"/":home, "/morocco/":tour, "/about/":about, "/terms/":legal, "/privacy/":legal};
   const isFile = location.protocol === "file:";
